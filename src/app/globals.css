@@ -2,12 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @layer utilities {
   .text-outline-sm {
     -webkit-text-stroke: 1px black; 
     color: inherit; 
   }
 }
+
 
 @layer utilities {
   .text-outline {

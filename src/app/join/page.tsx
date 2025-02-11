@@ -1,3 +1,4 @@
+'use client'
 import { Irish_Grover } from "next/font/google";
 const mainFont = Irish_Grover({
   weight: ["400"],

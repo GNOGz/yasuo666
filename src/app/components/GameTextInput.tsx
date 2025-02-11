@@ -1,6 +1,6 @@
 const GameTextInput = () =>{
     return(
-        <input type="text" className=" border border-solid border-black bg-[#D9D9D9] ">
+        <input type="text" className="h-[2em] border border-solid border-black bg-secondary ">
             
         </input>
     )

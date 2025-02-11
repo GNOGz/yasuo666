@@ -23,7 +23,7 @@ export default function RootLayout({
         <link rel="icon" href="/Yasuo1.svg" />
       </head>
       <body
-      className={`${mainFont.className} text-white overflow-y-hidden overflow-x-hidden`}
+      className={`${mainFont.className} bg-slate-500 text-white overflow-y-hidden overflow-x-hidden`}
       >
         {children}
       </body>
