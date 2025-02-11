@@ -12,7 +12,10 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily:{
+        customFont: ['"Irish Grover"', "sans-serif"],
+      }
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography"),require("tailwindcss-textshadow")],
 } satisfies Config;
