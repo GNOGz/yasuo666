@@ -1,21 +1,27 @@
-import { Irish_Grover } from "next/font/google";
-const mainFont = Irish_Grover({
-  weight: ["400"],
-  subsets: ["latin"],
-});
+"use client";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import GameButton from "./components/GameButton";
 
-export default function Home() {
+const Home = () => {
+  const router = useRouter();
+  // useEffect(() => {
+  //     router.push("/join");
+  //   }, []);
+
   return (
-    <div
-      className={`min-h-screen bg-[url(/loginBackground.png)] bg-cover bg-no-repeat text-center text-9xl text-white  ${mainFont.className}`}
-    >
-      <div className="text-outline">
-        <h1 className="cursor-pointer py-16 ">{`KOMBAT`} </h1>
-        <div className="py-5 gap-10">
-          <h1 className="cursor-pointer hover:scale-110">{`Play`}</h1>
-          <h1 className="cursor-pointer hover:scale-110">{`About`}</h1>
-        </div>
+    <div className="text-center py-16 bg-slate-500 grid gap-2">
+      <div>
+        <GameButton title={"Compile"}></GameButton>
+      </div>
+      <div>
+        <GameButton title={"Agree"}></GameButton>
+      </div>
+      <div>
+        <GameButton title={"Join"}></GameButton>
       </div>
     </div>
   );
-}
+};
+
+export default Home;
