@@ -9,11 +9,11 @@ export default function Home() {
     <div
       className={`min-h-screen bg-[url(/loginBackground.png)] bg-cover bg-no-repeat text-center text-9xl text-white  ${mainFont.className}`}
     >
-      <div className="drop-shadow-[4px_2px_0_black]">
+      <div className="text-outline">
         <h1 className="cursor-pointer py-16 ">{`KOMBAT`} </h1>
         <div className="py-5 gap-10">
-          <h1 className="cursor-pointer">{`Play`}</h1>
-          <h1 className="cursor-pointer">{`About`}</h1>
+          <h1 className="cursor-pointer hover:scale-110">{`Play`}</h1>
+          <h1 className="cursor-pointer hover:scale-110">{`About`}</h1>
         </div>
       </div>
     </div>
