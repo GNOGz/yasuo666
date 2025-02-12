@@ -11,6 +11,10 @@ import {
 } from "react-hexgrid";
 import "../App.css";
 
+const greet = (event:any) =>{
+  alert(event.target.q)
+}
+
 const grid = () => {
   const hexagons = GridGenerator.orientedRectangle(8, 8);
   // console.log(hexagons);
@@ -24,8 +28,8 @@ const grid = () => {
           origin={{ x: -25, y: -40 }}
         >
           {hexagons.map((hex, i) => (
-            <Hexagon key={i} q={hex.q} r={hex.r} s={hex.s}>
-              {/* <Text>{`${hex.q} ${hex.r} ${hex.s} `}</Text> */}
+            <Hexagon key={i} q={hex.q} r={hex.r} s={hex.s} onClick={()=>{greet(this)}}>
+              <Text>{`${hex.q} ${hex.r} ${hex.s} `}</Text>
             </Hexagon>
           ))}
         </Layout>

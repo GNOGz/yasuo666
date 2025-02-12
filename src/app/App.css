@@ -37,7 +37,7 @@ body {
   }
   svg g text {
     font-size: 0.3em;
-    fill: #FFFFFF;
+    fill: #000000;
     fill-opacity: 0.4;
     transition: fill-opacity .2s;
   }
