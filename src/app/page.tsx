@@ -5,7 +5,9 @@ import GameTextInput from "./components/GameTextInput";
 import GameButton from "./components/GameButton";
 import GameTextWithJoin from "./components/GameTextWithJoin";
 import { Hexagon } from "./components/Hexagon";
-import { HexagonList } from "./components/HexagonList";
+import { HexGrid } from "react-hexgrid";
+import { HexagonList } from "./components/HexagonGrid";
+
 
 const Home = () => {
   const router = useRouter();
@@ -29,8 +31,11 @@ const Home = () => {
       <div className="flex justify-center items-center">
         <GameTextWithJoin></GameTextWithJoin>
       </div>
-        <HexagonList></HexagonList>
+      <div>
+        <></>
+      </div>
     </div>
+    
   );
 };
 
