@@ -11,9 +11,9 @@ import { HexagonList } from "./components/HexagonGrid";
 
 const Home = () => {
   const router = useRouter();
-  // useEffect(() => {
-  //     router.push("/join");
-  //   }, []);
+  useEffect(() => {
+      router.push("/join");
+    }, []);
   const sayHello = () => {
     alert("hello world");
   };

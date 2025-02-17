@@ -1,15 +1,9 @@
 "use client";
-import {
-  HexGrid,
-  Layout,
-  Hexagon,
-  Text,
-  Pattern,
-  Path,
-  Hex,
-  GridGenerator,
-} from "react-hexgrid";
-import "../App.css";
+
+
+import TextArea from "../components/TextArea";
+import PlayerStatus from "../components/PlayerStatus";
+import PlayerMenu from "../components/PlayerMenu";
 
 const greet = () =>{
   alert("Hello")
@@ -34,6 +28,8 @@ const grid = () => {
           ))}
         </Layout>
       </HexGrid>
+
+
     </div>
   );
 };
