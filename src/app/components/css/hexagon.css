@@ -1,10 +1,19 @@
 /* HTML: <div class="hexagon"></div> */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .hexagon {
-    --b: 3px; /* adjust to control the border  */
-    height: 100px; /* adjust to control the size  */
-    aspect-ratio: 1/cos(30deg);
-    clip-path: 
-      polygon(0 50%,50% -50%,100% 50%,50% 150%,0 50%,
+  @apply relative bg-black;
+  /* position: relative; */
+  z-index: 0;
+  --b: 2px;
+  /* adjust to control the border  */
+  height: 70px;
+  /* adjust to control the size  */
+  aspect-ratio: 1/cos(30deg);
+  clip-path:
+    polygon(0 50%, 50% -50%, 100% 50%, 50% 150%, 0 50%,
       var(--b) 50%,
       calc(25% + var(--b)*cos(60deg)) calc(100% - var(--b)*sin(60deg)),
       calc(75% - var(--b)*cos(60deg)) calc(100% - var(--b)*sin(60deg)),
@@ -12,5 +21,71 @@
       calc(75% - var(--b)*cos(60deg)) calc(var(--b)*sin(60deg)),
       calc(25% + var(--b)*cos(60deg)) calc(var(--b)*sin(60deg)),
       var(--b) 50%);
-    background: #000000;
-  }
+}
+
+.hexagonP1 {
+  position: absolute;
+  z-index: 2;
+  height: 67.5px;
+  aspect-ratio: 1/cos(30deg);
+  clip-path: polygon(50% -50%, 100% 50%, 50% 150%, 0 50%);
+  margin-left: 1px;
+  margin-top: 1px;
+  background: #CCDF92;
+}
+
+.hexagonP2 {
+  position: absolute;
+  z-index: 2;
+  height: 67.5px;
+  aspect-ratio: 1/cos(30deg);
+  clip-path: polygon(50% -50%, 100% 50%, 50% 150%, 0 50%);
+  margin-left: 1px;
+  margin-top: 1px;
+  background: #DE3163;
+}
+
+
+.hexagonMM {
+  position: absolute;
+  z-index: 5;
+  height: 40px;
+  aspect-ratio: 1/cos(30deg);
+  clip-path: polygon(50% -50%, 100% 50%, 50% 150%, 0 50%);
+  margin-top: 15px;
+  margin-left: 17px;
+  background: #00ffff;
+}
+
+.hexagonMMBP1 {
+  position: absolute;
+  z-index: 4;
+  height: 50px;
+  aspect-ratio: 1/cos(30deg);
+  clip-path: polygon(50% -50%, 100% 50%, 50% 150%, 0 50%);
+  margin-left: 11px;
+  margin-top: 10px;
+  background: #CCDF92;
+}
+
+.hexagonMMBP2 {
+  position: absolute;
+  z-index: 4;
+  height: 50px;
+  aspect-ratio: 1/cos(30deg);
+  clip-path: polygon(50% -50%, 100% 50%, 50% 150%, 0 50%);
+  margin-left: 11px;
+  margin-top: 10px;
+  background: #DE3163;
+}
+
+.hexagonMMB {
+  position: absolute;
+  z-index: 3;
+  height: 56px;
+  aspect-ratio: 1/cos(30deg);
+  clip-path: polygon(50% -50%, 100% 50%, 50% 150%, 0 50%);
+  margin-left: 7.5px;
+  margin-top: 7px;
+  background: #000000;
+}

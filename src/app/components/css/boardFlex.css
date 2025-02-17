@@ -1,0 +1,42 @@
+.flex-container {
+
+  display: flex;
+
+  justify-content: center;
+  align-items: stretch;
+
+  background-color: #bbdefb;
+  height: 100%;
+  padding: 15px;
+  gap: 5px;
+
+}
+
+.flex-container>div {
+  background: #ffecb3;
+  border: 3px solid #ffcc80;
+  border-radius: 5px;
+  padding: 8px;
+}
+
+
+.item1 {
+  flex-grow: 1;
+  align-self: auto;
+  margin-right: 5px;
+  width: 0px;
+}
+
+.item2 {
+  flex-grow: 2;
+  align-self: auto;
+  width: 0px;
+}
+
+.item3 {
+
+  flex-grow: 1;
+  align-self: auto;
+  margin-left: 5px;
+  width: 0px;
+}
