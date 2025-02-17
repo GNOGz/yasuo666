@@ -1,12 +1,8 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import GameTextInput from "./components/GameTextInput";
 import GameButton from "./components/GameButton";
 import GameTextWithJoin from "./components/GameTextWithJoin";
-import { Hexagon } from "./components/Hexagon";
-import { HexGrid } from "react-hexgrid";
-import { HexagonList } from "./components/HexagonGrid";
 
 
 const Home = () => {

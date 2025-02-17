@@ -20,7 +20,7 @@ const font = JetBrains_Mono({
 const AgreementMenu = ({count,compileHandleClick,agreeHandleClick}:agreementInterface) => {
   return (
     <div
-      className={`border border-black border-b-2 my-2 w-[26.125em] h-[29.8125em] bg-primary p-5  ${font.className}`}
+      className={` border border-black border-b-2 my-2 w-[26.125em] h-[29.8125em] bg-primary p-5  ${font.className}`}
     >
       <div className="flex flex-row justify-between items-center">
         <div className="text-center mx-auto">
@@ -33,12 +33,12 @@ const AgreementMenu = ({count,compileHandleClick,agreeHandleClick}:agreementInte
         </div>
         <div className="leftOfTopSide input ">
           <div className="w-[15em]">
-            <h1>name</h1>
+            <h1 >name</h1>
             <GameTextInput></GameTextInput>
           </div>
           <div className="w-[9em]">
             <h1>defense</h1>
-            <GameTextInput></GameTextInput>
+            <GameTextInput forNumber={true}></GameTextInput>
           </div>
         </div>
       </div>
