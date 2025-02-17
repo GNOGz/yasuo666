@@ -1,6 +1,11 @@
 /* HTML: <div class="hexagon"></div> */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .hexagon {
-  position: relative;
+  @apply relative bg-black;
+  /* position: relative; */
   z-index: 0;
   --b: 2px;
   /* adjust to control the border  */
@@ -16,7 +21,6 @@
       calc(75% - var(--b)*cos(60deg)) calc(var(--b)*sin(60deg)),
       calc(25% + var(--b)*cos(60deg)) calc(var(--b)*sin(60deg)),
       var(--b) 50%);
-  background: #000000;
 }
 
 .hexagonP1 {
