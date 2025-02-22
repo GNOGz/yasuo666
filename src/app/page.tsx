@@ -8,7 +8,7 @@ import GameTextWithJoin from "./components/GameTextWithJoin";
 const Home = () => {
   const router = useRouter();
   useEffect(() => {
-      router.push("/join");
+      router.push("/menu");
     }, []);
   const sayHello = () => {
     alert("hello world");
