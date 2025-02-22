@@ -1,8 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import GameButton from "./components/GameButton";
-import GameTextWithJoin from "./components/GameTextWithJoin";
+
 
 
 const Home = () => {
@@ -14,22 +13,8 @@ const Home = () => {
     alert("hello world");
   };
   return (
-    <div className="text-center py-16 bg-slate-500 grid gap-2">
-      <div>
-        <GameButton title={"Compile"} handleClick={sayHello}></GameButton>
-      </div>
-      <div>
-        <GameButton title={"Agree"}></GameButton>
-      </div>
-      <div>
-        <GameButton title={"Join"}></GameButton>
-      </div>
-      <div className="flex justify-center items-center">
-        <GameTextWithJoin></GameTextWithJoin>
-      </div>
-      <div>
-        <></>
-      </div>
+    <div className="min-h-screen  text-center flex flex-col justify-center bg-slate-400">
+      <div className="text-9xl">LOADING......</div>
     </div>
     
   );
