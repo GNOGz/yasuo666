@@ -15,7 +15,7 @@ const joinPage = () => {
       <JoinMenu></JoinMenu>
       <div className="border border-double-2 border-black text-3xl text-outline-sm bg-secondary p-3">
         <div>
-          Note : Once your decision is made. You can not undo anything. <br></br>
+          <span className="text-red-400">Important : </span> Once your decision is made. You can not undo anything. <br></br>
           Because <span className="text-red-400"> people who follow the wind doesn't look back at the past.</span>
         </div>
       </div>

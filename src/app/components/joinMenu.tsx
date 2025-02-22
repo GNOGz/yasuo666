@@ -3,6 +3,7 @@ import GameButton from "./GameButton";
 import GameTextWithJoin from "./GameTextWithJoin";
 import JoinButton from "./JoinButton";
 import { useRouter } from "next/navigation";
+import GameCheckButton from "./GameCheckbox";
 
 const JoinMenu = () => {
   const router = useRouter();
@@ -34,8 +35,12 @@ const JoinMenu = () => {
               <JoinButton />
             </div>
           </div>
-          <div className="text-center mt-2">
+          <div className="text-center mt-2 ">
             <GameButton title="Start" handleClick={handleStart}></GameButton>
+            <div className="mt-2 flex gap-2 flex-row justify-center">
+              <GameCheckButton></GameCheckButton>
+              <GameCheckButton></GameCheckButton>
+            </div>
           </div>
         </div>
       </div>
