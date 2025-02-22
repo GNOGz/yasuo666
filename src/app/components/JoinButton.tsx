@@ -5,11 +5,12 @@ const mainFont = Irish_Grover({
     subsets: [],
   });
 
-const JoinButton = ({ handleClick }: {  handleClick?: (event: React.MouseEvent<HTMLButtonElement>) => void }) => {
+const JoinButton = ({disable, handleClick }: { disable?:boolean, handleClick?: (event: React.MouseEvent<HTMLButtonElement>) => void }) => {
     return (
       <button
         className={`${mainFont.className} w-[2.375rem] h-[1.438rem] text-sm text-outline-mini border-black border border-solid px-1 bg-[#D9D9D9]`}
         onClick={handleClick} 
+        disabled={disable?disable:false}
       >
         {"JOIN"}
       </button>

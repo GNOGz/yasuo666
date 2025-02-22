@@ -4,10 +4,10 @@ import { useRouter } from "next/navigation";
 const modeSelect = () => {
   const router = useRouter();
   const handleBackClick = () =>{
-    router.push('/join');
+    router.push('/menu');
   }
   const handleDuelClick = ()=>{
-    router.push('/player_agreement');
+    router.push('/join');
   }
   return (
     <div

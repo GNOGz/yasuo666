@@ -16,7 +16,7 @@ export default function join() {
 
   return (
     <div
-      className={`min-h-screen bg-[url(https://images3.alphacoders.com/129/1291921.jpg)] bg-cover bg-no-repeat text-center text-9xl text-white  ${mainFont.className}`}
+      className={`flex flex-col justify-center min-h-screen bg-[url(https://images3.alphacoders.com/129/1291921.jpg)] bg-cover bg-no-repeat text-center text-9xl text-white  ${mainFont.className}`}
     >
       <div className="text-outline">
         <h1 className="py-16 ">{`KOMBAT`} </h1>
