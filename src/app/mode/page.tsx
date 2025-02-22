@@ -20,7 +20,7 @@ const modeSelect = () => {
             onClick={handleDuelClick}
             className="cursor-pointer hover:scale-110"
           >{`Duel`}</div>
-          <div className="cursor-pointer hover:scale-110">{`Solitare`}</div>
+          <div className="cursor-pointer hover:scale-110">{`Solitaire`}</div>
           <div className="cursor-pointer hover:scale-110">{`Auto`}</div>
         </div>
       </div>
