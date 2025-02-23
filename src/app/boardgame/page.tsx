@@ -10,7 +10,8 @@ const greet = (event: any) => {
 const grid = () => {
   const priamry = "#919191"
   const secondary = "#D9D9D9"
-  // console.log(hexagons);
+  var h = window.innerHeight;
+
   return (
     <div>
       <div style={{
@@ -18,35 +19,36 @@ const grid = () => {
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "white",
-        height: "800px",
+        height: h,
       }}>
-        <div
+
+<div
           className="item1"
           style={{
-            backgroundColor: priamry,
             height: "100%",
             border: "10px solid black",
           }}
-        ></div>
+        >
+        </div>
         <div
           className="item2"
           style={{
             height: "100%",
-            backgroundColor: priamry,
             border: "10px solid black",
           }}
         >
-          <HexagonGrid></HexagonGrid>
+         <HexagonGrid></HexagonGrid>
         </div>
         <div
           className="item3"
           style={{
             height: "100%",
-            backgroundColor: priamry,
             border: "10px solid black",
           }}
-        ></div>
-      </div>
+        >
+        </div>
+
+       </div>
 
     </div>
   );
