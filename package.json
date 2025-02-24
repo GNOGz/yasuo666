@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@stomp/stompjs": "^7.0.0",
     "@svgdotjs/svg.js": "^3.2.4",
     "google-fonts": "^1.0.0",
     "honeycomb-grid": "^4.1.5",

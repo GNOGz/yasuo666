@@ -1,5 +1,8 @@
+'use client'
 import JoinMenu from "../components/joinMenu";
 import { JetBrains_Mono } from "next/font/google";
+import { useState,useEffect } from "react";
+import { Client } from "@stomp/stompjs";
 
 const mainFont = JetBrains_Mono({
   weight: ["400"],
@@ -7,6 +10,8 @@ const mainFont = JetBrains_Mono({
 });
 
 const joinPage = () => {
+
+  
   return (
     <div
       className={`${mainFont.className} flex flex-col gap-16 justify-center items-center text-outline min-h-screen bg-[url(https://images3.alphacoders.com/129/1291921.jpg)] bg-cover bg-no-repeat text-center text-9xl text-white  `}
@@ -21,6 +26,7 @@ const joinPage = () => {
       </div>
     </div>
   );
-};
+}
+;
 
 export default joinPage;

@@ -6,18 +6,20 @@ import { JetBrains_Mono } from "next/font/google";
 import Image from "next/image";
 import GameButtonSM from "./GameButtonSM";
 import GameCheckButton from "./GameCheckbox";
+import { agreementProp } from "../Types/Interfaces";
 
 interface agreementInterface {
     count:number,
     compileHandleClick?:(event: React.MouseEvent<HTMLButtonElement>) => void,
     agreeHandleClick?:(event: React.MouseEvent<HTMLButtonElement>) => void,
+    prop?:agreementProp,
 }
 
 const font = JetBrains_Mono({
   weight: ["400"],
   subsets: [],
 });
-const AgreementMenu = ({count,compileHandleClick,agreeHandleClick}:agreementInterface) => {
+const AgreementMenu = ({count,compileHandleClick,agreeHandleClick,prop}:agreementInterface) => {
   return (
     <div
       className={` border border-black border-b-2 my-2 w-[26.125em] h-[29.8125em] bg-primary p-5  ${font.className}`}
@@ -34,7 +36,7 @@ const AgreementMenu = ({count,compileHandleClick,agreeHandleClick}:agreementInte
         <div className="leftOfTopSide input ">
           <div className="w-[15em]">
             <h1 >name</h1>
-            <GameTextInput></GameTextInput>
+            <GameTextInput ></GameTextInput>
           </div>
           <div className="w-[9em]">
             <h1>defense</h1>
