@@ -15,7 +15,7 @@ export const HexagonGrid= () => {
                     style={{
                         display: "flex",
                         justifyContent: "center",
-                        marginTop: rowIndex === 0 ? "50px" : "-65px",
+                        marginTop: rowIndex === 0 ? "20px" : "-65px",
                     }}>
                     <div style={{
                         display: "flex",
@@ -30,7 +30,7 @@ export const HexagonGrid= () => {
                                     marginTop: index %2 === 0 ? "35px" : "-35px",
                                    
                                 }}>
-                                <Hexagon Own={1} Minion={-3}/>
+                                <Hexagon Own={-1} Minion={-1}/>
                             </div>))}
                     </div></div>
             ))}

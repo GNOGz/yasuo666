@@ -9,57 +9,57 @@ const pitures = ['/image/MMT1.jpg', '/image/MMT2.jpg', '/image/MMT3.jpg', '/imag
 export const Hexagon = (data: data) => {
   
   var strokeHex = "black";
-  var OwnColor = "white";
-  if (data.Own === 1) {
-    OwnColor = "#CCDF92"
-  } else if (data.Own === 2) {
-    OwnColor = "#DE3163"
+  var OwnColor = "fill-white";
+  if (data.Own > 0) {
+    OwnColor = "fill-Player1";
+  } else if (data.Own < 0 ) {
+    OwnColor = "fill-Player2";
   }
   let MMT = null;
-  let MM = null;
   var MMImage = pitures[-1];
   if (data.Minion != 0) {
      MMImage = pitures[Math.abs(data.Minion) -1];
     if (data.Minion > 0) {
-      var Team = "#CCDF92";
+      var Team = "fill-Player1";
     } else {
-      var Team = "#DE3163";
+      var Team = "fill-Player2";
     }
     MMT = <g transform="translate(150,150) rotate(90) scale(1.5)">
-      <use href="#hexagon" fill={Team} stroke="black" strokeWidth="3" />
+      <use href="#hexagon" className={Team} stroke="black" strokeWidth="3" />
     </g>
-    MM =  <g transform="translate(150,150) rotate(90) scale(1)">
-    <use href="#hexagon" fill="url(#hexagon-pattern)" stroke="black" strokeWidth="3" /></g>
+   
   }
 
   return (
 
-    <div>
+    <div className=" w-[100px] h-[100px] items-center" >
+      
+        {data.Minion != 0 ? <img src={MMImage}   width="40px"  style={{
+          aspectRatio : "1/cos(30deg)",
+          clipPath: "polygon(50% -50%,100% 50%,50% 150%,0 50%)",
+          marginTop: "33px",
+          marginLeft: "30px"
+        }} className="absolute"></img> 
+      : null}
       <svg width="100px" height="100px" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">        
       <defs>
-        <polygon id="hexagon" points="
-                50,0 100,30 100,90 50,120 0,90 0,30
-            "transform="translate(-50,-60)" />
-        <pattern id="hexagon-pattern" patternUnits="userSpaceOnUse" width="100" height="100" >
-      <image href={MMImage} transform="rotate(-90,50,50)" width="100" height="100"/>
-    </pattern>
+        <polygon id="hexagon" points="0 -60,50 -30,50 30,0 60,-50 30,-50 -30,0, -60"/>
       </defs>
-
+        
         <g transform="translate(150,150) rotate(90) scale(2)">
-          <use href="#hexagon" fill={OwnColor} stroke="black" strokeWidth="3" />
+          <use href="#hexagon" className={OwnColor} stroke="black" strokeWidth="3" />
           <g strokeWidth="1" strokeLinecap="round">
-            <line x1="0" y1="-60" x2="50" y2="-30" stroke={strokeHex} />
-            <line x1="50" y1="-30" x2="50" y2="30" stroke={strokeHex} />
-            <line x1="50" y1="30" x2="0" y2="60" stroke={strokeHex} />
-            <line x1="0" y1="60" x2="-50" y2="30" stroke={strokeHex} />
+            <line x1="0" y1="-60" x2="50" y2="-30"   stroke={strokeHex} />
+            <line x1="50" y1="-30" x2="50" y2="30"   stroke={strokeHex} />
+            <line x1="50" y1="30" x2="0" y2="60"     stroke={strokeHex} />
+            <line x1="0" y1="60" x2="-50" y2="30"    stroke={strokeHex} />
             <line x1="-50" y1="30" x2="-50" y2="-30" stroke={strokeHex} />
-            <line x1="-50" y1="-30" x2="0" y2="-60" stroke={strokeHex} />
+            <line x1="-50" y1="-30" x2="0" y2="-60"  stroke={strokeHex} />
           </g>
         </g>
 
         ${MMT}
-        ${MM}
-       
+      
       </svg>
 
     </div>
