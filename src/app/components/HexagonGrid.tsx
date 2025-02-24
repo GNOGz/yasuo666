@@ -1,7 +1,7 @@
 import { Hexagon } from "./Hexagon"; 
 
 export const HexagonGrid= () => {
-    const hexagons = Array.from({ length: 8 });
+    const columns = Array.from({ length: 8 });
     const rows = Array.from({ length: 8 });
     return (
         <div
@@ -23,14 +23,14 @@ export const HexagonGrid= () => {
                         justifyContent: "center",
                     }}
                     >
-                        {hexagons.map((_, index) => (
-                            <div key={index}
+                        {columns.map((_,colIndex) => (
+                            <div key={colIndex}
                                 style={{
-                                    marginLeft: index === 0 ? "0px" : "-37px",
-                                    marginTop: index %2 === 0 ? "35px" : "-35px",
+                                    marginLeft: colIndex === 0 ? "0px" : "-37px",
+                                    marginTop: colIndex %2 === 0 ? "35px" : "-35px",
                                    
                                 }}>
-                                <Hexagon Own={-1} Minion={-1}/>
+                                <Hexagon id={(rowIndex*10)+colIndex} Own={-1} Minion={-1} />
                             </div>))}
                     </div></div>
             ))}

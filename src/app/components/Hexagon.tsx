@@ -3,6 +3,7 @@ import "./css/hexagon.css";
 interface data {
   Own: number, //0 1 2
   Minion: number, // -5 -4 -3 -2 -1  0  1  2  3  4  5 
+  id: number
 }
 const pitures = ['/image/MMT1.jpg', '/image/MMT2.jpg', '/image/MMT3.jpg', '/image/MMT4.jpg', '/image/MMT5.jpg']
 
@@ -32,7 +33,7 @@ export const Hexagon = (data: data) => {
 
   return (
 
-    <div className=" w-[100px] h-[100px] items-center" >
+    <div className=" w-[100px] h-[100px] items-center" id={data.id.toString()}>
       
         {data.Minion != 0 ? <img src={MMImage}   width="40px"  style={{
           aspectRatio : "1/cos(30deg)",
