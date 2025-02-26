@@ -13,7 +13,7 @@
 }
 
 .flex-container>div {
-  background: #ffecb3;
+  background: #f6f6f6;
   border: 3px solid #ffcc80;
   border-radius: 5px;
   padding: 8px;
@@ -25,18 +25,20 @@
   align-self: auto;
   margin-right: 5px;
   width: 0px;
+  background-color: white;
 }
 
 .item2 {
   flex-grow: 2;
   align-self: auto;
   width: 0px;
+  background-color: white;
 }
 
 .item3 {
-
   flex-grow: 1;
   align-self: auto;
   margin-left: 5px;
   width: 0px;
+  background-color: white;
 }

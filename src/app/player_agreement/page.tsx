@@ -43,6 +43,10 @@ const playerAgreement = () => {
       <div className="flex items-start flex-col-reverse mb-14 mr-10">
         <PlayerStatus money={10000} team={-5}></PlayerStatus>
       </div>
+
+      <div>
+        
+      </div>
     </div>
   );
 };
