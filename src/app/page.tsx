@@ -14,7 +14,7 @@ const Home = () => {
   };
   return (
     <div className="min-h-screen  text-center flex flex-col justify-center bg-slate-400">
-      <div className="text-9xl">LOADING......</div>
+      <div className="text-9xl text-outline">LOADING......</div>
     </div>
     
   );
