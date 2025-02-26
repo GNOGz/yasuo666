@@ -92,7 +92,7 @@ const grid = () => {
 
         <div
           className="item3 h-[100%] border border-black border-b-2">
-          <div className="flex  flex-col-reverse mt-96 mr-10">
+          <div className="flex  flex-col-reverse mt-[34rem] mr-10">
             <PlayerStatus money={10000} team={-5}></PlayerStatus>
           </div>
           <div className="flex-1 flex justify-center">
