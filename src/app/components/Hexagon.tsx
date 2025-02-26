@@ -1,9 +1,11 @@
 
 import "./css/hexagon.css";
+import { HexBt } from "./HexBt";
 interface data {
   Own: number, //0 1 2
   Minion: number, // -5 -4 -3 -2 -1  0  1  2  3  4  5 
-  id: number
+  id: number,
+  bt: boolean,
 }
 const pitures = ['/image/MMT1.jpg', '/image/MMT2.jpg', '/image/MMT3.jpg', '/image/MMT4.jpg', '/image/MMT5.jpg']
 
@@ -34,7 +36,14 @@ export const Hexagon = (data: data) => {
   return (
 
     <div className=" w-[100px] h-[100px] items-center" id={data.id.toString()}>
-      
+        
+        {data.bt != false ? <div style = {{ marginTop: "26px",
+          marginLeft: "26px",
+          zIndex: "1",
+        }} className="absolute">
+          <HexBt index={data.id}></HexBt>
+          </div> : null}
+        
         {data.Minion != 0 ? <img src={MMImage}   width="40px"  style={{
           aspectRatio : "1/cos(30deg)",
           clipPath: "polygon(50% -50%,100% 50%,50% 150%,0 50%)",
@@ -42,6 +51,7 @@ export const Hexagon = (data: data) => {
           marginLeft: "30px"
         }} className="absolute"></img> 
       : null}
+
       <svg width="100px" height="100px" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">        
       <defs>
         <polygon id="hexagon" points="0 -60,50 -30,50 30,0 60,-50 30,-50 -30,0, -60"/>
