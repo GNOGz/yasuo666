@@ -1,5 +1,5 @@
 'use client'
-import JoinMenu from "../components/joinMenu";
+import JoinMenu from "@/app/components/joinMenu";
 import { JetBrains_Mono } from "next/font/google";
 import { useState,useEffect } from "react";
 import { Client } from "@stomp/stompjs";
@@ -9,12 +9,11 @@ const mainFont = JetBrains_Mono({
   subsets: [],
 });
 
-const joinPage = () => {
-
+const solitairPage = () => {
   
   return (
     <div
-      className={`${mainFont.className} flex flex-col gap-8 justify-center items-center text-outline min-h-screen bg-[url(https://images3.alphacoders.com/129/1291921.jpg)] bg-cover bg-no-repeat text-center text-9xl text-white  `}
+      className={`${mainFont.className} flex flex-col gap-8 justify-center items-center text-outline min-h-screen bg-[url(https://preview.redd.it/in73r6sbixz31.png?width=4096&format=png&auto=webp&s=810fa4aef8f17b2ccf3ca4c18601eb731904d37e)] bg-cover bg-no-repeat text-center text-9xl text-white  `}
     >
       <div className="text-5xl">Player(s) Setup</div>
       <JoinMenu></JoinMenu>
@@ -29,4 +28,4 @@ const joinPage = () => {
 }
 ;
 
-export default joinPage;
+export default solitairPage;
