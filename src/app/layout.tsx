@@ -1,10 +1,13 @@
-'use client'
+"use client";
 import { Irish_Grover } from "next/font/google";
 import type { Metadata } from "next";
 import { useSession, SessionProvider } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import "./globals.css";
+import { store } from "./stores/store";
+import { Provider } from "react-redux";
+import WebSocketProvider from "./provider/WebsocketProvider";
 
 const mainFont = Irish_Grover({
   weight: ["400"],
@@ -21,7 +24,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   //     const router = useRouter();
   // useEffect(() => {
   //     alert('Hello, World!');
@@ -37,7 +39,9 @@ export default function RootLayout({
       <body
         className={`${mainFont.className} text-white overflow-y-hidden overflow-x-hidden`}
       >
-        {children}
+        <Provider store={store}>
+          <WebSocketProvider>{children}</WebSocketProvider>
+        </Provider>
       </body>
     </html>
   );
