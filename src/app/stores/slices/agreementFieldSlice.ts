@@ -1,12 +1,7 @@
 import { createSlice,PayloadAction } from "@reduxjs/toolkit";
 import { Stomp } from "@stomp/stompjs";
 import { act } from "react";
-
-interface agreementFieldState {
-    name:String,
-    defense:Number ,
-    strategy:string,
-}
+import { agreementFieldState } from "@/app/Types/Interfaces";
 
 const initialState:agreementFieldState = {
     name:"",

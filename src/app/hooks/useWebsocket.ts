@@ -7,6 +7,7 @@ import {
 } from "@/app/stores/slices/websocketSlice";
 import { useAppSelector } from "@/app/stores/hook";
 import { setField } from "../stores/slices/agreementFieldSlice";
+import { agreementFieldState } from "../Types/Interfaces";
 
 export const useWebSocket = () => {
   const dispatch = useDispatch();
@@ -49,29 +50,18 @@ export const useWebSocket = () => {
 
   const connect = () => {
     try {
-      let stompClient = new Client({
-        brokerURL: "ws://localhost:8080/ws",
-        onConnect: () => {
-          console.log("Connected to WebSocket");
-          stompClient.subscribe("/agreement/minion", (message) => {
-            if (message.body) {
-              console.log("Payload update");
-              console.log(message.body);
-            }
-          });
-        },
-        onStompError: (frame) => {
-          console.error("WebSocket Error:", frame);
-        },
+      const stompClient = new Client({
+        webSocketFactory: () => new WebSocket(`ws://localhost:8080/ws`), // ✅ Using native WebSocket
+        debug: () => {}, // ✅ Disable debug logging
+        reconnectDelay: 1000, // ✅ Auto-reconnect after 5s
+        onConnect: () => {onConnected(stompClient)}, // ✅ Handle connection
+        onStompError: (frame) => console.error("STOMP Error:", frame), // ✅ Handle errors
       });
 
-      stompClient.activate();
-
-      return () => {
-        stompClient.deactivate();
-      };
+      stompClient.activate(); // ✅ Start connection
+      console.log("successfully connect to ws")
     } catch (e) {
-      console.log(e);
+        console.error("WebSocket Connection Error:", e);
     }
   };
 
@@ -96,7 +86,7 @@ export const useWebSocket = () => {
 
   const onUpdateAgreement = (payload: IMessage) => {
     const newMessageObject = JSON.parse(payload.body);
-    dispatch(setField(newMessageObject));
+    // dispatch(setField(newMessageObject));
     console.log(
       `recieve update minion setting from another player`,
       newMessageObject
