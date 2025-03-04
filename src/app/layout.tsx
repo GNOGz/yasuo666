@@ -28,13 +28,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const gameStatus = useSelector((state: any) => state.gameSetting.gameStatus);
-  const mode = useSelector((state: any) => state.gameSetting.mode);
-  const {connect ,subscribe} = useWebSocket();
+  // const gameStatus = useSelector((state: any) => state.gameSetting.gameStatus);
+  // const mode = useSelector((state: any) => state.gameSetting.mode);
+  // const {connect ,subscribe} = useWebSocket();
   
   const router = useRouter();
   useEffect(() => {
-    connect();
+    // connect();
     // subscribe();
     
   }, []);
