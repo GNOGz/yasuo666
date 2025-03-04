@@ -7,17 +7,12 @@ import GameButtonSM from "./GameButtonSM";
 import GameCheckButton from "./GameCheckbox";
 import { agreementProp } from "../Types/Interfaces";
 import { useEffect } from "react";
-import { Stomp, Client } from "@stomp/stompjs";
+import { Stomp, Client,Message,IMessage } from "@stomp/stompjs";
 import { useDispatch, useSelector } from "react-redux";
 import { setDefense, setName, setStrategy } from "../stores/slices/agreementFieldSlice";
 import { useWebSocket } from "../hooks/useWebsocket";
-
-interface agreementInterface {
-  count: number;
-  compileHandleClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  agreeHandleClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  prop?: agreementProp;
-}
+import { useAppSelector } from "../stores/hook";
+import { selectWebsocket } from "../stores/slices/websocketSlice";
 
 const font = JetBrains_Mono({
   weight: ["400"],
@@ -30,6 +25,7 @@ const AgreementMenu = ({
   const strategyField = useSelector((state:any) => state.agreementField.strategy);
   const dispatch = useDispatch();
   const {sendMessage,subscribe,connect} = useWebSocket();
+  const client = useAppSelector(selectWebsocket);
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setName(event.target.value));
@@ -44,29 +40,20 @@ const AgreementMenu = ({
   }
 
 
-  // useEffect(() => {
-  //   let stompClient = new Client({
-  //     brokerURL: "ws://localhost:8080/ws",
-  //     onConnect: () => {
-  //       console.log("Connected to WebSocket");
-  //       stompClient.subscribe("/agreement/minion", (message) => {
-  //         if (message.body) {
-  //           console.log("Payload update");
-  //           console.log(message.body);
-  //         }
-  //       });
-  //     },
-  //     onStompError: (frame) => {
-  //       console.error("WebSocket Error:", frame);
-  //     },
-  //   });
+  useEffect(() => {
+    subscribe("/agreement/minion",(payload:IMessage) =>{
+      onSettingUpdate(payload);
+    })
+  }, [client.isConnected]);
 
-  //   stompClient.activate();
-
-  //   return () => {
-  //     stompClient.deactivate();
-  //   };
-  // }, []);
+  const onSettingUpdate = (payload:IMessage) =>{
+    console.log(`received payload :  ${payload.body}`);
+    const jsonPayload = JSON.parse(payload.body);
+    
+    dispatch(setName(jsonPayload.name));
+    dispatch(setDefense(jsonPayload.defense));
+    dispatch(setStrategy(jsonPayload.strategy));
+  }
 
   const handleCompileClick = () =>{
 

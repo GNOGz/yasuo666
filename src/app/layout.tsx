@@ -8,6 +8,10 @@ import "./globals.css";
 import { store } from "./stores/store";
 import { Provider } from "react-redux";
 import WebSocketProvider from "./provider/WebsocketProvider";
+import { gameSetting } from "./Types/Interfaces";
+import { useSelector,useDispatch } from "react-redux";
+import { setGameStatus,setMode } from "./stores/slices/gameSettingSlice";
+import { useWebSocket } from "./hooks/useWebsocket";
 
 const mainFont = Irish_Grover({
   weight: ["400"],
@@ -24,12 +28,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  //     const router = useRouter();
-  // useEffect(() => {
-  //     alert('Hello, World!');
-  //     router.push("/menu");
-
-  // }, [])
+  const gameStatus = useSelector((state: any) => state.gameSetting.gameStatus);
+  const mode = useSelector((state: any) => state.gameSetting.mode);
+  const {connect ,subscribe} = useWebSocket();
+  
+  const router = useRouter();
+  useEffect(() => {
+    connect();
+    // subscribe();
+    
+  }, []);
   return (
     <html lang="en">
       <head>

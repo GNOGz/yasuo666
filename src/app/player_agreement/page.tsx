@@ -8,8 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { increment, decrement } from "../stores/slices/counterSlice";
 
 const playerAgreement = () => {
-  const count = useSelector((state: any) => state.counter.value);
-  const dispatch = useDispatch();
+
 
   return (
     <div className="flex justify-between bg-[url(https://images3.alphacoders.com/129/1291921.jpg)] p-5 min-h-screen ">
@@ -23,11 +22,9 @@ const playerAgreement = () => {
         <div className="text-xl text-background  text-green-500 ">
           Now It's Your turn to adjust the minion settings.
         </div>
-        <AgreementMenu count={1} />
+        <AgreementMenu />
         <div className="flex flex-col gap-2">
-          <div>{count}</div>
-          <button onClick={()=>{dispatch(increment())}} className="bg-slate-400 p-1">increase</button>
-          <button onClick={()=>{dispatch(decrement())}} className="bg-slate-400 p-1">decrease</button>
+
         </div>
       </div>
       <div className="flex items-start flex-col-reverse mb-14 mr-10">

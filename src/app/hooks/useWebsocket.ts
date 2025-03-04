@@ -2,28 +2,30 @@ import { useDispatch } from "react-redux";
 import { Stomp, IMessage, StompSubscription, Client } from "@stomp/stompjs";
 import {
   selectWebsocket,
+  setClient,
   setConnectionStatus,
-  setWebSocketClient,
 } from "@/app/stores/slices/websocketSlice";
 import { useAppSelector } from "@/app/stores/hook";
 import { setField } from "../stores/slices/agreementFieldSlice";
-import { agreementFieldState } from "../Types/Interfaces";
+import { useState } from "react";
 
 export const useWebSocket = () => {
   const dispatch = useDispatch();
-  const { client, isConnected } = useAppSelector(selectWebsocket);
+  const { isConnected ,client} = useAppSelector(selectWebsocket);
   const serverUrl = process.env.API_BASE_URL;
-
+  
   const subscribe = (
     destination: string,
     callback: (payload: IMessage) => void
   ) => {
+    console.log('subscribing')
     if (client && isConnected) {
       const subscription = client.subscribe(destination, callback);
       console.log(`Subscribed to ${destination}`);
       return subscription;
     } else {
       console.log("No active WebSocket connection to disconnect.");
+      console.log(client,isConnected)
     }
   };
 
@@ -51,15 +53,15 @@ export const useWebSocket = () => {
   const connect = () => {
     try {
       const stompClient = new Client({
-        webSocketFactory: () => new WebSocket(`ws://localhost:8080/ws`), // ✅ Using native WebSocket
-        debug: () => {}, // ✅ Disable debug logging
-        reconnectDelay: 1000, // ✅ Auto-reconnect after 5s
-        onConnect: () => {onConnected(stompClient)}, // ✅ Handle connection
-        onStompError: (frame) => console.error("STOMP Error:", frame), // ✅ Handle errors
+        brokerURL:`ws://localhost:8080/ws`,
+        debug: () => {}, 
+        reconnectDelay: 1000, 
+        onConnect: () => {
+          onConnected(stompClient);}, 
+        onStompError: (frame) => console.error("STOMP Error:", frame), 
       });
 
-      stompClient.activate(); // ✅ Start connection
-      console.log("successfully connect to ws")
+      stompClient.activate(); 
     } catch (e) {
         console.error("WebSocket Connection Error:", e);
     }
@@ -68,7 +70,6 @@ export const useWebSocket = () => {
   const disconnect = () => {
     if (client && isConnected) {
       client.deactivate().then(() => {
-        dispatch(setWebSocketClient(null));
         dispatch(setConnectionStatus(false));
         console.log("WebSocket disconnected");
       });
@@ -77,16 +78,15 @@ export const useWebSocket = () => {
     }
   };
 
-  const onConnected = (stompClient: Client) => {
-    stompClient.subscribe(`/agreement/minion`, onUpdateAgreement);
-    dispatch(setWebSocketClient(stompClient));
+  const onConnected = (client:Client) => {
+    dispatch(setClient(client))
     dispatch(setConnectionStatus(true));
     console.log("WebSocket connected successfully");
   };
 
   const onUpdateAgreement = (payload: IMessage) => {
     const newMessageObject = JSON.parse(payload.body);
-    // dispatch(setField(newMessageObject));
+    dispatch(setField(newMessageObject));
     console.log(
       `recieve update minion setting from another player`,
       newMessageObject
