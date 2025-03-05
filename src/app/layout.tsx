@@ -34,9 +34,7 @@ export default function RootLayout({
   
   const router = useRouter();
   useEffect(() => {
-    // connect();
-    // subscribe();
-    
+    router.push("/menu")
   }, []);
   return (
     <html lang="en">

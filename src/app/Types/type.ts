@@ -1,5 +1,5 @@
 export enum gameMode {
-    Duel,Solitaire,Auto
+    duel,solitaire,auto
 }
 
 export enum role{
@@ -7,5 +7,8 @@ export enum role{
 }
 
 export enum gameStatus {
-    Start,Setup,GameOn
+    modeSelect,
+    playerJoin,
+    minionAgreement,
+    gameOn,
 }

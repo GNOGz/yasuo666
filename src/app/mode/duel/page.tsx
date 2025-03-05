@@ -10,8 +10,6 @@ const mainFont = JetBrains_Mono({
 });
 
 const joinPage = () => {
-
-  
   return (
     <div
       className={`${mainFont.className} flex flex-col gap-8 justify-center items-center text-outline min-h-screen bg-[url(https://preview.redd.it/in73r6sbixz31.png?width=4096&format=png&auto=webp&s=810fa4aef8f17b2ccf3ca4c18601eb731904d37e)] bg-cover bg-no-repeat text-center text-9xl text-white  `}
