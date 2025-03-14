@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import { gameSetting } from "@/app/Types/Interfaces";
 import { gameMode,gameStatus } from "@/app/Types/type";
 const initialState : gameSetting = {
-    mode : gameMode.Duel,
-    gameStatus : gameStatus.Start
+    mode : gameMode.duel,
+    gameStatus : gameStatus.modeSelect
 }
 
 export const counterSLice = createSlice({

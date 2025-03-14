@@ -7,24 +7,33 @@ import GameButtonSM from "./GameButtonSM";
 import GameCheckButton from "./GameCheckbox";
 import { agreementProp } from "../Types/Interfaces";
 import { useEffect } from "react";
-import { Stomp, Client,Message,IMessage } from "@stomp/stompjs";
+import { Stomp, Client, Message, IMessage } from "@stomp/stompjs";
 import { useDispatch, useSelector } from "react-redux";
-import { setDefense, setName, setStrategy } from "../stores/slices/agreementFieldSlice";
+import {
+  setDefense,
+  setName,
+  setStrategy,
+} from "../stores/slices/agreementFieldSlice";
 import { useWebSocket } from "../hooks/useWebsocket";
 import { useAppSelector } from "../stores/hook";
 import { selectWebsocket } from "../stores/slices/websocketSlice";
+import MenuButton from "./MenuButton";
+import AgreementButton from "./AgreementButton";
 
 const font = JetBrains_Mono({
   weight: ["400"],
   subsets: [],
 });
-const AgreementMenu = ({
-}) => {
+const AgreementMenu = ({}) => {
   const nameField = useSelector((state: any) => state.agreementField.name);
-  const defenseField = useSelector((state:any) => state.agreementField.defense);
-  const strategyField = useSelector((state:any) => state.agreementField.strategy);
+  const defenseField = useSelector(
+    (state: any) => state.agreementField.defense
+  );
+  const strategyField = useSelector(
+    (state: any) => state.agreementField.strategy
+  );
   const dispatch = useDispatch();
-  const {sendMessage,subscribe,connect} = useWebSocket();
+  const { sendMessage, subscribe, connect } = useWebSocket();
   const client = useAppSelector(selectWebsocket);
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,42 +44,43 @@ const AgreementMenu = ({
     dispatch(setDefense(Number(event.target.value)));
   };
 
-  const handleStraetgyChange = (event:React.ChangeEvent<HTMLTextAreaElement>) => {
-    dispatch(setStrategy(event.target.value))
-  }
-
+  const handleStraetgyChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    dispatch(setStrategy(event.target.value));
+  };
 
   useEffect(() => {
-    subscribe("/agreement/minion",(payload:IMessage) =>{
+    subscribe("/agreement/minion", (payload: IMessage) => {
       onSettingUpdate(payload);
-    })
+    });
   }, [client.isConnected]);
 
-  const onSettingUpdate = (payload:IMessage) =>{
+  const onSettingUpdate = (payload: IMessage) => {
     console.log(`received payload :  ${payload.body}`);
     const jsonPayload = JSON.parse(payload.body);
-    
+
     dispatch(setName(jsonPayload.name));
     dispatch(setDefense(jsonPayload.defense));
     dispatch(setStrategy(jsonPayload.strategy));
-  }
+  };
 
-  const handleCompileClick = () =>{
+  const handleCompileClick = () => {};
 
-  }
-
-  const handleConfirmClick = async(event:React.MouseEvent<HTMLButtonElement>)  => {
-    sendMessage('/minion/update',{
-      name:nameField,
-      defense:defenseField,
-      strategy:strategyField,
+  const handleConfirmClick = async (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    sendMessage("/minion/update", {
+      name: nameField,
+      defense: defenseField,
+      strategy: strategyField,
     });
-    alert('Minion update sent')
-  }
+    alert("Minion update sent");
+  };
 
   return (
     <div
-      className={` border border-black border-b-2 my-2 w-[27.125rem] h-[29.8125rem] bg-primary p-5  ${font.className}`}
+      className={` border border-black border-b-2 my-2 w-[28.125rem] h-[36.8125rem] bg-primary p-5  ${font.className}`}
     >
       <div className="flex flex-row justify-between items-center">
         <div className="text-center mx-auto">
@@ -91,15 +101,20 @@ const AgreementMenu = ({
           </div>
           <div className="w-[9rem]">
             <h1>defense</h1>
-            <GameTextInput forNumber={true} 
-            prob = {defenseField} 
-            handleChange={handleDefenseChange}></GameTextInput>
+            <GameTextInput
+              forNumber={true}
+              prob={defenseField}
+              handleChange={handleDefenseChange}
+            ></GameTextInput>
           </div>
         </div>
       </div>
       <h1>Strategy</h1>
       <div className="flex flex-row">
-        <TextArea prop = {strategyField} handleChange={handleStraetgyChange} ></TextArea>
+        <TextArea
+          prop={strategyField}
+          handleChange={handleStraetgyChange}
+        ></TextArea>
         <div className="mx-auto ">
           <div className="my-16">
             <h1 className="text-9xl flex justify-center items-center text-outline">{`${1}`}</h1>
@@ -119,6 +134,28 @@ const AgreementMenu = ({
                 title="Confirm"
               ></GameButtonSM>
             </div>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-row items-center justify-center">
+        <div className="flex items-center flex-col gap-1">
+          <AgreementButton 
+            color="bg-secondary" 
+            title="START"
+          ></AgreementButton>
+          <div className="flex gap-2">
+            <GameCheckButton></GameCheckButton>
+            <GameCheckButton></GameCheckButton>
+          </div>
+        </div>
+        <div className="flex items-center flex-col gap-1">
+          <AgreementButton
+            color="bg-secondary"
+            title="ADD MORE"
+          ></AgreementButton>
+          <div className="flex gap-2">
+            <GameCheckButton></GameCheckButton>
+            <GameCheckButton></GameCheckButton>
           </div>
         </div>
       </div>
