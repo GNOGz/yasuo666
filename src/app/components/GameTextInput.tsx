@@ -7,6 +7,8 @@ interface TextInputProp {
   height?: string;
   forNumber?: boolean;
   disable?: boolean;
+  prob?:string,
+  handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void 
 }
 
 const GameTextInput = ({
@@ -14,12 +16,9 @@ const GameTextInput = ({
   height,
   forNumber,
   disable,
+  prob,
+  handleChange
 }: TextInputProp) => {
-  const [val, setVal] = useState("");
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setVal(event.target.value);
-  };
-
   const h = height ? height : "h-[2em]";
   return (
     <div className={`${length}`}>
@@ -28,8 +27,8 @@ const GameTextInput = ({
         className={`text-black p-2 ${length} ${h} border border-solid border-black bg-secondary 
           appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 `}
         disabled={disable ? disable : false}
-        value={val}
         onChange={handleChange}
+        value={prob}
       ></input>
     </div>
   );

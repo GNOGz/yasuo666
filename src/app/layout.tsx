@@ -1,10 +1,17 @@
-'use client'
+"use client";
 import { Irish_Grover } from "next/font/google";
 import type { Metadata } from "next";
 import { useSession, SessionProvider } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import "./globals.css";
+import { store } from "./stores/store";
+import { Provider } from "react-redux";
+import WebSocketProvider from "./provider/WebsocketProvider";
+import { gameSetting } from "./Types/Interfaces";
+import { useSelector,useDispatch } from "react-redux";
+import { setGameStatus,setMode } from "./stores/slices/gameSettingSlice";
+import { useWebSocket } from "./hooks/useWebsocket";
 
 const mainFont = Irish_Grover({
   weight: ["400"],
@@ -21,13 +28,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-  //     const router = useRouter();
-  // useEffect(() => {
-  //     alert('Hello, World!');
-  //     router.push("/menu");
-
-  // }, [])
+  // const gameStatus = useSelector((state: any) => state.gameSetting.gameStatus);
+  // const mode = useSelector((state: any) => state.gameSetting.mode);
+  // const {connect ,subscribe} = useWebSocket();
+  
+  const router = useRouter();
+  useEffect(() => {
+    router.push("/menu")
+  }, []);
   return (
     <html lang="en">
       <head>
@@ -37,7 +45,9 @@ export default function RootLayout({
       <body
         className={`${mainFont.className} text-white overflow-y-hidden overflow-x-hidden`}
       >
-        {children}
+        <Provider store={store}>
+          <WebSocketProvider>{children}</WebSocketProvider>
+        </Provider>
       </body>
     </html>
   );

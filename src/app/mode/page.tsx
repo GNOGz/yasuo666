@@ -1,21 +1,36 @@
 "use client";
 import { useRouter } from "next/navigation";
+import { useWebSocket } from "../hooks/useWebsocket";
+import { gameMode, gameStatus } from "../Types/type";
 
 const modeSelect = () => {
   const router = useRouter();
+  const {sendMessage} = useWebSocket();
   const handleBackClick = () => {
     router.push("/menu");
   };
 
   const handleDuelClick = () => {
+    sendMessage("/gameSetting/setGameSetting",{
+      mode:"duel",
+      gameStatus:"playerJoin",
+    })
     router.push("/mode/duel");
   };
 
   const handleSolitareClick = () => {
+    sendMessage("/gameSetting/setGameSetting",{
+      mode:"solitaire",
+      gameStatus:"playerJoin",
+    })
     router.push("/mode/solitaire");
   };
 
   const handleAutoCLick = () => {
+    sendMessage("/gameSetting/setGameSetting",{
+      mode:"auto",
+      gameStatus:"playerJoin",
+    })
     router.push("/player_agreement");
   };
 
