@@ -5,6 +5,14 @@ export interface agreementProp{
     defense:number,
     strategy:string
 }
+export interface RoomID {
+    roomId:string | null | undefined
+}
+export interface PlayerProfileInterface{
+    userName:string | null | undefined,
+    role:string | null | undefined,
+    roomId:string | null | undefined,
+}
 
 export interface agreementFieldState {
     name:String,
@@ -15,4 +23,10 @@ export interface agreementFieldState {
 export interface gameSetting {
     gameStatus : gameStatus
     mode: gameMode
+}
+
+export interface userProfile{
+    name:string | null,
+    role:string | null,
+    roomId:string | null
 }

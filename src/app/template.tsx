@@ -7,8 +7,49 @@ import { useWebSocket } from "./hooks/useWebsocket";
 import { IMessage, Message } from "@stomp/stompjs";
 import { gameStatus, gameMode } from "./Types/type";
 import { useRouter, usePathname } from "next/navigation";
+import { PlayerProfileInterface,RoomID } from "./Types/Interfaces";
+import api from "./libs/api";
+import { setRole, setRoomId,selectUserName, selectRole } from "./stores/slices/playerProfileSlice";
+import { setName } from "./stores/slices/agreementFieldSlice";
+import { useAppSelector } from "./stores/hook";
+import { RootState } from "./stores/store";
 
 const template = ({ children }: { children: React.ReactNode }) => {
+  const dispatch = useDispatch();
+  //local storage related function here
+  // const roomId = useSelector((state:RootState)=>{state.playerProfile.roomId})
+  const roomId = useAppSelector(selectUserName);
+  const playerRole = useAppSelector(selectRole);
+  const playerName = useAppSelector(selectUserName);
+
+  const checkRoomId = async () => {
+    const storedData = localStorage.getItem("userProfile");
+    const playerProfile: PlayerProfileInterface | null = storedData ? JSON.parse(storedData) : null;
+    console.log(playerProfile)
+
+    try{
+      const response = await api.get("/roomId");
+      const parsedResponse = JSON.stringify((response.data))
+      console.log(`current roomId : ${parsedResponse}`)
+      if( !playerProfile ||(playerProfile.roomId !== response.data.roomId)){
+        console.log("room id doesn't match. reset user profile")
+        dispatch(setRoomId(response.data.roomId));
+        dispatch(setName(""));
+        dispatch(setRole(null));
+        const dataToStored:PlayerProfileInterface = {
+          userName:null,
+          role:null,
+          roomId : response.data.roomId
+        }
+        localStorage.setItem("userProfile",JSON.stringify(dataToStored));
+      }
+    }
+    catch(err){
+      alert(err);
+    }
+  };
+
+  //ws connect and check room status below
   const mode = useSelector((state: any) => {
     state.gameSetting.mode;
   });
@@ -16,13 +57,15 @@ const template = ({ children }: { children: React.ReactNode }) => {
     state.gameSetting.gameSetting;
   });
   const { connect, subscribe } = useWebSocket();
-  const dispatch = useDispatch();
   const router = useRouter();
   const currentPath = usePathname();
   useEffect(() => {
+    //check user profile first
+    checkRoomId();
+    //ws below
     connect();
     subscribe("/setting", (payload: IMessage) => {
-      console.log(payload.body);
+      console.log("recived from setting : \n" + payload.body);
       const jsonPayload = JSON.parse(payload.body);
       const currentGameStatus = jsonPayload.gameStatus;
       const currentMode = jsonPayload.mode;
@@ -38,7 +81,11 @@ const template = ({ children }: { children: React.ReactNode }) => {
           router.push("/menu");
         }
       } else if (currentGameStatus == "playerJoin") {
-        if(currentPath != ("/mode/duel") && currentMode != ("/mode/solitaire") && currentPath != "/player_agreement"){
+        if (
+          currentPath != "/mode/duel" &&
+          currentMode != "/mode/solitaire" &&
+          currentPath != "/player_agreement"
+        ) {
           if (currentMode == "auto") {
             alert("Game has started in auto mode.");
             router.push("/player_agreement");
@@ -60,7 +107,9 @@ const template = ({ children }: { children: React.ReactNode }) => {
     });
   }, []);
 
-  return <>{children}</>;
+  return <>
+  {children}
+  </>;
 };
 
 export default template;

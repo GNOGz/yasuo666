@@ -13,7 +13,13 @@ export default function join() {
   const handlePlayClick = () => {
     router.push("/mode");
   };
-
+  const handleAboutClick = () =>{
+    alert("clearing local storage");
+    const data = localStorage.getItem("userProfile")
+    const parsedData = data?JSON.parse(data):null;
+    console.log(parsedData);
+    console.log(parsedData.roomId);
+  }
   return (
     <div
       className={`flex flex-col justify-center min-h-screen bg-[url(https://images3.alphacoders.com/129/1291921.jpg)] bg-cover bg-no-repeat text-center text-9xl text-white  ${mainFont.className}`}
@@ -25,7 +31,7 @@ export default function join() {
             onClick={handlePlayClick}
             className="cursor-pointer hover:scale-110"
           >{`Play`}</div>
-          <div className="cursor-pointer hover:scale-110">{`About`}</div>
+          <div onClick={handleAboutClick} className="cursor-pointer hover:scale-110">{`About`}</div>
         </div>
       </div>
     </div>
