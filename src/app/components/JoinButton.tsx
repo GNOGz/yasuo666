@@ -6,9 +6,10 @@ const mainFont = Irish_Grover({
   });
 
 const JoinButton = ({disable, handleClick }: { disable?:boolean, handleClick?: (event: React.MouseEvent<HTMLButtonElement>) => void }) => {
-    return (
+  const opacity = disable?"opacity-50":"";  
+  return (
       <button
-        className={`${mainFont.className} w-[2.375rem] h-[1.438rem] text-sm text-outline-mini border-black border border-solid px-1 bg-[#D9D9D9]`}
+        className={`${opacity} ${mainFont.className} w-[2.375rem] h-[1.438rem] text-sm text-outline-mini border-black border border-solid px-1 bg-[#D9D9D9]`}
         onClick={handleClick} 
         disabled={disable?disable:false}
       >

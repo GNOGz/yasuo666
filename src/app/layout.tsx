@@ -5,7 +5,7 @@ import { useSession, SessionProvider } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import "./globals.css";
-import { store } from "./stores/store";
+import  store  from "./stores/store";
 import { Provider } from "react-redux";
 import WebSocketProvider from "./provider/WebsocketProvider";
 import { gameSetting } from "./Types/Interfaces";

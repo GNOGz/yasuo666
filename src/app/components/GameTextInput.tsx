@@ -20,12 +20,13 @@ const GameTextInput = ({
   handleChange
 }: TextInputProp) => {
   const h = height ? height : "h-[2em]";
+  const opacity = disable?"opacity-50":"";
   return (
     <div className={`${length}`}>
       <input
         type={forNumber ? "number" : "text"}
         className={`text-black p-2 ${length} ${h} border border-solid border-black bg-secondary 
-          appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 `}
+          appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 ${opacity}`}
         disabled={disable ? disable : false}
         onChange={handleChange}
         value={prob}

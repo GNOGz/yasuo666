@@ -1,15 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from './slices/counterSlice'
+import counterReducer from './slices/counterSlice';
 import agreementFieldReducer from './slices/agreementFieldSlice';
-import websocketReducer from './slices/websocketSlice'
-import gameSettingReducer from './slices/gameSettingSlice'
+import websocketReducer from './slices/websocketSlice';
+import gameSettingReducer from './slices/gameSettingSlice';
+import playerProfileReducer from './slices/playerProfileSlice';
+import roomDataSliceReducer from './slices/roomDataSlice';
 
-export const store = configureStore({
+ const store = configureStore({
     reducer:{
         counter:counterReducer,
         agreementField:agreementFieldReducer,
         websocket:websocketReducer,
-        gameSetting:gameSettingReducer
+        gameSetting:gameSettingReducer,
+        playerProfile:playerProfileReducer,
+        roomData:roomDataSliceReducer
     },
     middleware :(getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck:false,
@@ -18,3 +22,4 @@ export const store = configureStore({
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
+export default store;
