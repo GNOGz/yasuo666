@@ -9,7 +9,7 @@ import { gameStatus, gameMode } from "./Types/type";
 import { useRouter, usePathname } from "next/navigation";
 import { PlayerProfileInterface,RoomID } from "./Types/Interfaces";
 import api from "./libs/api";
-import { setRole, setRoomId,selectUserName, selectRole } from "./stores/slices/playerProfileSlice";
+import { setRole, setRoomId,selectUserName, selectRole, setUserName } from "./stores/slices/playerProfileSlice";
 import { setName } from "./stores/slices/agreementFieldSlice";
 import { useAppSelector } from "./stores/hook";
 import { RootState } from "./stores/store";
@@ -32,9 +32,10 @@ const template = ({ children }: { children: React.ReactNode }) => {
       const parsedResponse = JSON.stringify((response.data))
       console.log(`current roomId : ${parsedResponse}`)
       if( !playerProfile ||(playerProfile.roomId !== response.data.roomId)){
+        //this IF checks if room id match the current game.
         console.log("room id doesn't match. reset user profile")
         dispatch(setRoomId(response.data.roomId));
-        dispatch(setName(""));
+        dispatch(setUserName(""));
         dispatch(setRole(null));
         const dataToStored:PlayerProfileInterface = {
           userName:null,
@@ -42,6 +43,12 @@ const template = ({ children }: { children: React.ReactNode }) => {
           roomId : response.data.roomId
         }
         localStorage.setItem("userProfile",JSON.stringify(dataToStored));
+      }
+      else{
+        //IF room id matches.Fetch local storage and set dispatch.
+        dispatch(setUserName(playerProfile.userName));
+        dispatch(setRoomId(playerProfile.roomId));
+        dispatch(setRole(playerProfile.role));
       }
     }
     catch(err){

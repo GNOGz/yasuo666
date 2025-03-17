@@ -12,7 +12,7 @@ export const playerProfile = createSlice({
     name:'playerProfile',
     initialState:initialState,
     reducers:{
-        setName:(state,action:PayloadAction<string | null | undefined>)=>{
+        setUserName:(state,action:PayloadAction<string | null | undefined>)=>{
             state.userName = action.payload;
         } ,
         setRole:(state,action:PayloadAction<string | null | undefined>) =>{
@@ -25,7 +25,7 @@ export const playerProfile = createSlice({
     }
 })
 
-export const {setName,setRole,setRoomId} = playerProfile.actions;
+export const {setUserName,setRole,setRoomId} = playerProfile.actions;
 export const selectUserName = (state:RootState) => state.playerProfile.userName;
 export const selectRole = (state:RootState) => state.playerProfile.role;
 export const selectRoomId = (state:RootState) => state.playerProfile.roomId;
