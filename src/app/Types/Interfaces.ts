@@ -30,3 +30,8 @@ export interface userProfile{
     role:string | null,
     roomId:string | null
 }
+export interface hex {
+    own:number;
+    mm:number;
+    bt:boolean;
+}
