@@ -1,6 +1,11 @@
-import { Hexagon } from "./Hexagon"; 
+import React from "react";
+import { Hexagon } from "./Hexagon";
+import { useSelector } from "react-redux";
+import { RootState } from "@/app/stores/store";
+import { setBoard } from "../stores/slices/boardSlice";
 
 export const HexagonGrid= () => {
+    const board = useSelector((state: RootState) => state.board.board);
     const columns = Array.from({ length: 8 });
     const rows = Array.from({ length: 8 });
     return (
@@ -30,7 +35,7 @@ export const HexagonGrid= () => {
                                     marginTop: colIndex %2 === 0 ? "35px" : "-35px",
                                    
                                 }}>
-                                <Hexagon id={(rowIndex*10)+colIndex} Own={0} Minion={0} bt={true}/>
+                                <Hexagon id={(rowIndex*10)+colIndex} Own={board[rowIndex][colIndex]?.own} Minion={board[rowIndex][colIndex]?.mm} bt={board[rowIndex][colIndex]?.bt}/>
                             </div>))}
                     </div></div>
             ))}
