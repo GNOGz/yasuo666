@@ -101,6 +101,7 @@ const JoinMenu = ({solitaire}: { solitaire: boolean }) => {
       alert("Game is starting !!");
       router.push("/player_agreement");
     }
+    
   };
   const updatePlayerProfile = (name: string, role: string) => {
     dispatch(setUserName(name));
