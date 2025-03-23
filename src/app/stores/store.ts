@@ -5,6 +5,7 @@ import websocketReducer from './slices/websocketSlice';
 import gameSettingReducer from './slices/gameSettingSlice';
 import playerProfileReducer from './slices/playerProfileSlice';
 import roomDataSliceReducer from './slices/roomDataSlice';
+import setBoardReducer from "./slices/boardSlice";
 
  const store = configureStore({
     reducer:{
@@ -13,7 +14,8 @@ import roomDataSliceReducer from './slices/roomDataSlice';
         websocket:websocketReducer,
         gameSetting:gameSettingReducer,
         playerProfile:playerProfileReducer,
-        roomData:roomDataSliceReducer
+        roomData:roomDataSliceReducer,
+        board:setBoardReducer,
     },
     middleware :(getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck:false,
