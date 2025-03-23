@@ -16,7 +16,7 @@ const TextArea = (prop: TextAreaProp) => {
       <textarea
       value={prop.prop}
       onChange={prop.handleChange}
-        className={`${font.className} border border-black my-2 resize-none text-black p-2 w-[15.68em] h-[18.815em] bg-secondary overflow-auto`}
+        className={`${font.className} border border-black my-2 resize-none text-black p-2 w-[39.063rem] h-[29.95rem] bg-secondary overflow-auto`}
       ></textarea>
     </div>
   );
