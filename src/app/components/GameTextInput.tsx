@@ -19,7 +19,7 @@ const GameTextInput = ({
   prob,
   handleChange
 }: TextInputProp) => {
-  const h = height ? height : "h-[2em]";
+  const h = height ? height : "h-[2rem]";
   const opacity = disable?"opacity-50":"";
   return (
     <div className={`${length}`}>

@@ -25,13 +25,12 @@ import {
   setUserName,
 } from "../stores/slices/playerProfileSlice";
 
-const JoinMenu = () => {
+const JoinMenu = ({solitaire}: { solitaire: boolean }) => {
   const [userProfile, setUserProfile] = useState<userProfile>();
   const [player1Exist, setPlayer1Exist] = useState<boolean>(false);
   const [player2Exist, setPlayer2Exist] = useState<boolean>(false);
 
   const router = useRouter();
-
   const thisPlayerName = useAppSelector(selectUserName);
   const roomId = useAppSelector(selectRoomId);
   const thisUserRole = useAppSelector(selectRole);
@@ -66,12 +65,20 @@ const JoinMenu = () => {
   };
 
   const handlePlayer1Click = () => {
+    if (!player1Name) {
+      alert("Please enter name before join");
+      return;
+    }
     sendMessage("/gameRoom/updatePlayer1Name", {
       playerName: player1Name,
     });
     updatePlayerProfile(player1Name, "player1");
   };
   const handlePlayer2Click = () => {
+    if (!player2Name) {
+      alert("Please enter name before join");
+      return;
+    }
     sendMessage("/gameRoom/updatePlayer2Name", {
       playerName: player2Name,
     });
@@ -85,13 +92,16 @@ const JoinMenu = () => {
   };
 
   const handleSpectatorClick = () => {
-    updatePlayerProfile(`spectator-${spectatorCount+1}`,"spectator");
+    updatePlayerProfile(`spectator-${spectatorCount + 1}`, "spectator");
     sendMessage("/gameRoom/addSpectator", null);
   };
 
   const handleStart = () => {
-    alert("Game is starting !!");
-    router.push("/player_agreement");
+    if(solitaire){
+      alert("Game is starting !!");
+      router.push("/player_agreement");
+    }
+    
   };
   const updatePlayerProfile = (name: string, role: string) => {
     dispatch(setUserName(name));
@@ -132,7 +142,11 @@ const JoinMenu = () => {
                 ? player2Name + (player2Name === thisPlayerName ? "(YOU)" : "")
                 : ""
             }
-            disable={player2Exist || thisUserRole !== null}
+            disable={
+              solitaire ||
+              player2Exist ||
+              thisUserRole !== null
+            }
             length="w-[15.688em]"
             handleChange={handlePlayer2Change}
             handleClick={handlePlayer2Click}
@@ -143,19 +157,30 @@ const JoinMenu = () => {
           <div className="pt-2 flex flex-col border border-b-2 border-black w-[15.688rem] h-[14.1563rem] bg-secondary">
             <ul className="pl-2 flex-grow overflow-auto">
               {spectatorList.map((spectator, index) => (
-                <li key={index}>{spectator+(thisPlayerName === spectator?"(YOU)":"")}</li>
+                <li key={index}>
+                  {spectator + (thisPlayerName === spectator ? "(YOU)" : "")}
+                </li>
               ))}
             </ul>
             <div className="flex justify-end">
-              <JoinButton disable={thisUserRole != null} handleClick={handleSpectatorClick} />
+              <JoinButton
+                disable={thisUserRole != null}
+                handleClick={handleSpectatorClick}
+              />
             </div>
           </div>
           <div className="text-center mt-2 ">
-            <GameButton disable={thisUserRole !== "player1" && thisUserRole !== "player2" } title="Start" handleClick={handleStart}></GameButton>
-            <div className="mt-2 flex gap-2 flex-row justify-center">
-              <GameCheckButton></GameCheckButton>
-              <GameCheckButton></GameCheckButton>
-            </div>
+            <GameButton
+              disable={thisUserRole !== "player1" && thisUserRole !== "player2"}
+              title="Start"
+              handleClick={handleStart}
+            ></GameButton>
+            { !solitaire &&
+              <div className="mt-2 flex gap-2 flex-row justify-center">
+                <GameCheckButton></GameCheckButton>
+                <GameCheckButton></GameCheckButton>
+              </div>
+            }
             <div>
               <h1 className="text-red-500">{thisPlayerName}</h1>
               <h1 className="text-red-500">{roomId}</h1>

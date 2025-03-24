@@ -12,6 +12,7 @@ export const playerProfile = createSlice({
     name:'playerProfile',
     initialState:initialState,
     reducers:{
+        
         setUserName:(state,action:PayloadAction<string | null | undefined>)=>{
             state.userName = action.payload;
         } ,

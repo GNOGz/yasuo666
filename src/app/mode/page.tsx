@@ -24,6 +24,7 @@ const modeSelect = () => {
       gameStatus:"playerJoin",
     })
     router.push("/mode/solitaire");
+
   };
 
   const handleAutoCLick = () => {

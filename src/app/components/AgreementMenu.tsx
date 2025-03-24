@@ -80,85 +80,52 @@ const AgreementMenu = ({}) => {
 
   return (
     <div
-      className={` border border-black border-b-2 my-2 w-[28.125rem] h-[36.8125rem] bg-primary p-5  ${font.className}`}
+      className={`flex flex-row border border-black border-b-2 my-2 min-h-screen bg-primary p-5  ${font.className}`}
     >
-      <div className="flex flex-row justify-between items-center">
-        <div className="text-center mx-auto">
-          <Image
-            src={"/yas1.jpg"}
-            alt={"YasuoPic"}
-            width={100}
-            height={100}
-          ></Image>
+      <div className="flex flex-col gap-2 justify-center p-5">
+        <Image
+          src={"/yas1.jpg"}
+          alt={"YasuoPic"}
+          width={400}
+          height={400}
+        ></Image>
+        <div className="flex flex-col items-start">
+          <h1>name</h1>
+          <GameTextInput
+            prob={nameField}
+            handleChange={handleNameChange}
+            length="w-[23.563rem]"
+          ></GameTextInput>
         </div>
-        <div className="leftOfTopSide input ">
-          <div className="w-[15rem]">
-            <h1>name</h1>
-            <GameTextInput
-              prob={nameField}
-              handleChange={handleNameChange}
-            ></GameTextInput>
-          </div>
-          <div className="w-[9rem]">
-            <h1>defense</h1>
-            <GameTextInput
-              forNumber={true}
-              prob={defenseField}
-              handleChange={handleDefenseChange}
-            ></GameTextInput>
-          </div>
+        <div className="flex flex-col items-start">
+          <h1>defense</h1>
+          <GameTextInput
+            forNumber={true}
+            prob={defenseField}
+            handleChange={handleDefenseChange}
+            length="w-[23.563rem]"
+          ></GameTextInput>
         </div>
       </div>
-      <h1>Strategy</h1>
-      <div className="flex flex-row">
+
+      {/* <div className="flex flex-row">
+        <h1>Strategy</h1>
         <TextArea
           prop={strategyField}
           handleChange={handleStraetgyChange}
         ></TextArea>
-        <div className="mx-auto ">
+        <div className="">
           <div className="my-16">
             <h1 className="text-9xl flex justify-center items-center text-outline">{`${1}`}</h1>
           </div>
-          <div className="flex flex-col ml-2  gap-1">
-            <div className="flex flex-row-reverse gap-1 ">
-              <GameCheckButton></GameCheckButton>
-              <GameCheckButton></GameCheckButton>
-            </div>
-            <div className="flex flex-row gap-2">
-              <GameButtonSM
-                handleClick={handleCompileClick}
-                title="Compile"
-              ></GameButtonSM>
-              <GameButtonSM
-                handleClick={handleConfirmClick}
-                title="Confirm"
-              ></GameButtonSM>
-            </div>
+          <div className="flex flex-row gap-2">
+            <GameButtonSM
+              handleClick={handleConfirmClick}
+              title="Confirm"
+            ></GameButtonSM>
           </div>
         </div>
-      </div>
-      <div className="flex flex-row items-center justify-center">
-        <div className="flex items-center flex-col gap-1">
-          <AgreementButton 
-            color="bg-secondary" 
-            title="START"
-          ></AgreementButton>
-          <div className="flex gap-2">
-            <GameCheckButton></GameCheckButton>
-            <GameCheckButton></GameCheckButton>
-          </div>
-        </div>
-        <div className="flex items-center flex-col gap-1">
-          <AgreementButton
-            color="bg-secondary"
-            title="ADD MORE"
-          ></AgreementButton>
-          <div className="flex gap-2">
-            <GameCheckButton></GameCheckButton>
-            <GameCheckButton></GameCheckButton>
-          </div>
-        </div>
-      </div>
+      </div> */}
     </div>
   );
 };
