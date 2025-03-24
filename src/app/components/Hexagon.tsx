@@ -6,6 +6,7 @@ interface data {
   Minion: number, // -5 -4 -3 -2 -1  0  1  2  3  4  5 
   id: number,
   bt: boolean,
+  off ? : boolean 
 }
 const pitures = ['/image/MMT1.jpg', '/image/MMT2.jpg', '/image/MMT3.jpg', '/image/MMT4.jpg', '/image/MMT5.jpg']
 
@@ -15,17 +16,20 @@ export const Hexagon = (data: data) => {
   var OwnColor = "fill-white";
   if (data.Own > 0) {
     OwnColor = "fill-Player1";
-  } else if (data.Own < 0 ) {
+  } else if (data.Own < 0) {
     OwnColor = "fill-Player2";
   }
   let MMT = null;
   var MMImage = pitures[-1];
   if (data.Minion != 0) {
      MMImage = pitures[Math.abs(data.Minion) -1];
-    if (data.Minion > 0) {
+    if (data.Minion > 0 && data.off != true) {
       var Team = "fill-Player1";
-    } else {
+    } else if((data.Minion < 0 && data.off != true)){
       var Team = "fill-Player2";
+    }
+    else {
+      var Team = "fill-primary";
     }
     MMT = <g transform="translate(150,150) rotate(90) scale(1.5)">
       <use href="#hexagon" className={Team} stroke="black" strokeWidth="3" />
@@ -77,3 +81,4 @@ export const Hexagon = (data: data) => {
   
   )
 }
+export default Hexagon
