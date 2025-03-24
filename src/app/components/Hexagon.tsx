@@ -8,7 +8,7 @@ interface data {
   bt: boolean,
   off ? : boolean 
 }
-const pitures = ['/image/MMT1.jpg', '/image/MMT2.jpg', '/image/MMT3.jpg', '/image/MMT4.jpg', '/image/MMT5.jpg']
+const pictures = ['/image/MMT1.jpg', '/image/MMT2.jpg', '/image/MMT3.jpg', '/image/MMT4.jpg', '/image/MMT5.jpg']
 
 export const Hexagon = (data: data) => {
   
@@ -20,9 +20,9 @@ export const Hexagon = (data: data) => {
     OwnColor = "fill-Player2";
   }
   let MMT = null;
-  var MMImage = pitures[-1];
+  var MMImage = pictures[-1];
   if (data.Minion != 0) {
-     MMImage = pitures[Math.abs(data.Minion) -1];
+     MMImage = pictures[Math.abs(data.Minion) -1];
     if (data.Minion > 0 && data.off != true) {
       var Team = "fill-Player1";
     } else if((data.Minion < 0 && data.off != true)){
@@ -79,6 +79,41 @@ export const Hexagon = (data: data) => {
 
     </div>
   
+  )
+}
+
+interface fdata {
+  Minion : number, 
+  string ? : number, 
+}
+export const Hexfreame = (data: fdata) => {
+  return (
+    <div className="relative w-[420px] h-[350px] flex items-center justify-center ">
+    <svg 
+      width="450px" 
+      height="450px" 
+      viewBox="0 0 300 300" 
+      preserveAspectRatio="xMidYMid meet" 
+      className="absolute w-[520px] h-[520px]"
+    >        
+      <defs>
+        <polygon id="hexagon" points="0 -60,50 -30,50 30,0 60,-50 30,-50 -30,0, -60"/>
+      </defs>
+      <g transform="translate(150,150) rotate(90) scale(2)">
+        <use href="#hexagon" stroke="black" strokeWidth="3" />
+      </g>
+    </svg>
+      <img 
+      src={pictures[data.Minion - 1]}  
+      className="absolute w-[400px]"
+      style={{
+        aspectRatio: "1/cos(30deg)",
+        clipPath: "polygon(50% -50%,100% 50%,50% 150%,0 50%)"
+      }} 
+    />
+  </div>
+  
+    
   )
 }
 export default Hexagon

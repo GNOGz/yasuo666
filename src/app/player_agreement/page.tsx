@@ -21,7 +21,8 @@ import { selectWebsocket } from "../stores/slices/websocketSlice";
 import MenuButton from "../components/MenuButton";
 import AgreementButton from "../components/AgreementButton";
 import GameButtonSM from "../components/GameButtonSM";
-import { Hexagon } from "../components/Hexagon";
+import { Hexagon,Hexfreame } from "../components/Hexagon";
+import PlayerChooseNumber from "../components/PlayerChooseNumber";
 const font = JetBrains_Mono({
   weight: ["400"],
   subsets: [],
@@ -102,17 +103,13 @@ const playerAgreement = () => {
     <div
       className={`gap-20 flex flex-row border border-black border-b-2  min-h-screen bg-primary justify-center ${font.className}`}
     >
+      <PlayerChooseNumber></PlayerChooseNumber>
       <div className="flex flex-col gap-4 justify-center p-5">
+      <h1 className="absolute select-none top-28 left-20 text-outline text-8xl">{minionNumber}</h1>
         <div className="flex justify-center">
-          {/* <Hexagon Own={0} Minion={1} id={0} bt={false} ></Hexagon> */}
-          <Image
-            src={"/yas1.jpg"}
-            alt={"YasuoPic"}
-            width={400}
-            height={400}
-          ></Image>
+          <Hexfreame Minion={minionNumber}></Hexfreame>
         </div>
-        <div className="flex flex-col items-start">
+        <div className="flex flex-col items-start ">
           <h1 className="text-black text-[1.5rem]">name</h1>
           <GameTextInput
             prob={nameField}
@@ -121,7 +118,7 @@ const playerAgreement = () => {
           ></GameTextInput>
         </div>
         <div className="flex flex-col items-start">
-          <h1 className="text-black text-[1.25rem] ">defense</h1>
+          <h1 className="text-black text-[1.25rem] select-none">defense</h1>
           <GameTextInput
             forNumber={true}
             prob={defenseField}
@@ -133,7 +130,7 @@ const playerAgreement = () => {
 
       <div className="flex flex-col items-center mt-20">
         <div className="divForStrategyField">
-          <h1 className="text-[1.2rem] text-black">Strategy</h1>
+          <h1 className="text-[1.2rem] text-black select-none">Strategy</h1>
           <TextArea
             prop={strategyField}
             handleChange={handleStraetgyChange}
@@ -146,7 +143,7 @@ const playerAgreement = () => {
               title="Confirm"
               disable={!(nameField && defenseField > 0 && strategyField)}
             ></GameButton>
-            <h1>{minionNumber}</h1>
+            
           </div>
         </div>
       </div>
