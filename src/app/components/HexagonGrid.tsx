@@ -1,13 +1,27 @@
+'use client'
 import React from "react";
 import { Hexagon } from "./Hexagon";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/stores/store";
 import { setBoard } from "../stores/slices/boardSlice";
+import { UseDispatch } from "react-redux";
+import { useAppSelector } from "../stores/hook";
+import { useEffect } from "react";
+import { useWebSocket } from "../hooks/useWebsocket";
+import { IMessage } from "@stomp/stompjs";
+import { dispatch } from "@svgdotjs/svg.js";
+import api from "../libs/api";
 
 export const HexagonGrid= () => {
     const board = useSelector((state: RootState) => state.board.board);
     const columns = Array.from({ length: 8 });
     const rows = Array.from({ length: 8 });
+    const {subscribe,sendMessage} = useWebSocket();
+    const dispatch = useDispatch();
+    useEffect(()=>{
+  
+    })
+
     return (
         <div
             style={{
@@ -39,6 +53,11 @@ export const HexagonGrid= () => {
                             </div>))}
                     </div></div>
             ))}
+            <button className="bg-black p-2" onClick={()=>{
+                    sendMessage("/game/botOperate",{
+
+                    });
+            }}>Hello world</button>
         </div>
     );
 }

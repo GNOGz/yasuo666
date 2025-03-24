@@ -1,6 +1,6 @@
 "use client";
 import "../components/css/boardFlex.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HexagonGrid } from "../components/HexagonGrid";
 import PlayerStatus from "../components/PlayerStatus";
 import PlayerMenu from "../components/PlayerMenu";
@@ -8,8 +8,11 @@ import PlayerMenuConfirm from "../components/PlayerManuConfirm";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/stores/store";
 import { selectUserName, selectRole, selectRoomId } from '../stores/slices/playerProfileSlice';
-
-
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { setBoard } from "../stores/slices/boardSlice";
+import { IMessage } from "@stomp/stompjs";
+import { useWebSocket } from "../hooks/useWebsocket";
 
 const greet = (event: any) => {
   alert(event.target.q)
@@ -24,7 +27,15 @@ const grid = () => {
   var h = window.innerHeight;
   const [selectedAction, setSelectedAction] = useState<string | null>(null);
   const [turnEnded, setTurnEnded] = useState<boolean>(false);
-
+  const dispatch = useDispatch();
+  const {subscribe} = useWebSocket();
+  useEffect(()=>{
+        subscribe("/mainGame", (payload:IMessage) => {
+          console.log(`received payload :  ${payload.body}`);
+          const jsonPayload = JSON.parse(payload.body);
+          dispatch(setBoard(jsonPayload.hexProp));
+        });
+  })
   const handleMenuClick = (action: string) => {
     if (action === "END TURN") {
       if (!turnEnded) { 
