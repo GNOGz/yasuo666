@@ -1,5 +1,6 @@
 import { createSlice,PayloadAction } from "@reduxjs/toolkit";
 import { hex } from '@/app/Types/Interfaces';
+import {RootState} from '../store'
 
 
 
@@ -20,6 +21,7 @@ interface mainGameInterface{
   board: hex[][]
 }
 
+
 const initialState = {
     board: genrateDummy() ,
 }
@@ -34,5 +36,6 @@ export const boardSlice = createSlice({
     }
 })
 
+export const selectBoard = (state:RootState) => state.board.board;
 export const {setBoard} = boardSlice.actions;
 export default boardSlice.reducer;
