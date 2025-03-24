@@ -14,7 +14,7 @@ export default {
         primary:"#919191",
         secondary:"#D9D9D9",
         Player2:"#DE3163",
-        Player1:"#CCDF92",
+        Player1:"#31BBDE",
         Player2Border:"#9B2346",
         Player1Border:"#8C9964",
         MMButton:"#3DA9E0",
