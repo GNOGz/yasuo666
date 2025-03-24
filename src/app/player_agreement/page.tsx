@@ -1,34 +1,154 @@
 "use client";
-import AgreementMenu from "../components/AgreementMenu";
-import PlayerStatus from "../components/PlayerStatus";
-import { useEffect, useState } from "react";
-import { Stomp,Client } from "@stomp/stompjs";
+import TextArea from "../components/TextArea";
+import GameTextInput from "../components/GameTextInput";
+import { JetBrains_Mono } from "next/font/google";
+import Image from "next/image";
+import GameButton from "../components/GameButton";
+import GameCheckButton from "../components/GameCheckbox";
 import { agreementProp } from "../Types/Interfaces";
-import { useSelector, useDispatch } from "react-redux";
-import { increment, decrement } from "../stores/slices/counterSlice";
-
+import { useEffect } from "react";
+import { Stomp, Client, Message, IMessage } from "@stomp/stompjs";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setDefense,
+  setName,
+  setStrategy,
+} from "../stores/slices/agreementFieldSlice";
+import { useState } from "react";
+import { useWebSocket } from "../hooks/useWebsocket";
+import { useAppSelector } from "../stores/hook";
+import { selectWebsocket } from "../stores/slices/websocketSlice";
+import MenuButton from "../components/MenuButton";
+import AgreementButton from "../components/AgreementButton";
+import GameButtonSM from "../components/GameButtonSM";
+import { Hexagon } from "../components/Hexagon";
+const font = JetBrains_Mono({
+  weight: ["400"],
+  subsets: [],
+});
 const playerAgreement = () => {
+  const [minionNumber, setMinionNumber] = useState<number>(1);
+  const [isChange, setIsChange] = useState<boolean>(false);
+  const nameField = useSelector((state: any) => state.agreementField.name);
+  const defenseField = useSelector(
+    (state: any) => state.agreementField.defense
+  );
+  const strategyField = useSelector(
+    (state: any) => state.agreementField.strategy
+  );
+  const dispatch = useDispatch();
+  const { sendMessage, subscribe, connect } = useWebSocket();
+  const client = useAppSelector(selectWebsocket);
 
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setName(event.target.value));
+    setIsChange(true)
+    console.log("Name Change bool : " + isChange);
+  };
+
+  const handleDefenseChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setDefense(Number(event.target.value)));
+    setIsChange(true)
+    console.log("Def Change bool : " + isChange);
+  };
+
+  const handleStraetgyChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    dispatch(setStrategy(event.target.value));
+    setIsChange(true);
+    console.log("Strategy Change bool : " + isChange);
+
+  };
+
+  useEffect(() => {
+    subscribe("/agreement/minion", (payload: IMessage) => {
+      onSettingUpdate(payload);
+      setIsChange(false)
+    });
+    // sendMessage("/agreement/getData",'');
+  }, [client.isConnected]);
+
+  const onSettingUpdate = (payload: IMessage) => {
+    console.log(`received payload :  ${payload.body}`);
+    const jsonPayload = JSON.parse(payload.body);
+    setMinionNumber(jsonPayload.number);
+    dispatch(setName(jsonPayload.name));
+    dispatch(setDefense(jsonPayload.defense));
+    dispatch(setStrategy(jsonPayload.strategy));
+  };
+
+  const handleCompileClick = () => {};
+
+  const handleConfirmClick = async (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    if (!isChange) {
+      alert("Both Player agree on this minion. Move on to the next minion.")
+    }
+    else{
+      alert("Minion update sent.")
+    }
+    sendMessage("/minion/update", {
+      isChange:isChange,
+      name: nameField,
+      defense: defenseField,
+      strategy: strategyField,
+    });
+    setIsChange(false);
+  };
 
   return (
-    <div className="flex justify-between bg-[url(https://images3.alphacoders.com/129/1291921.jpg)] p-5 min-h-screen ">
-      <div className="flex items-start mt-14 ml-10">
-        <PlayerStatus money={10000} team={5}></PlayerStatus>
+    <div
+      className={`gap-20 flex flex-row border border-black border-b-2  min-h-screen bg-primary justify-center ${font.className}`}
+    >
+      <div className="flex flex-col gap-4 justify-center p-5">
+        <div className="flex justify-center">
+          {/* <Hexagon Own={0} Minion={1} id={0} bt={false} ></Hexagon> */}
+          <Image
+            src={"/yas1.jpg"}
+            alt={"YasuoPic"}
+            width={400}
+            height={400}
+          ></Image>
+        </div>
+        <div className="flex flex-col items-start">
+          <h1 className="text-black text-[1.5rem]">name</h1>
+          <GameTextInput
+            prob={nameField}
+            handleChange={handleNameChange}
+            length="w-[23.563rem]"
+          ></GameTextInput>
+        </div>
+        <div className="flex flex-col items-start">
+          <h1 className="text-black text-[1.25rem] ">defense</h1>
+          <GameTextInput
+            forNumber={true}
+            prob={defenseField}
+            handleChange={handleDefenseChange}
+            length="w-[23.563rem]"
+          ></GameTextInput>
+        </div>
       </div>
-      <div className="flex-1 flex flex-col  justify-center items-center">
-        <div className="text-xl text-background  text-red-500 ">
-          Wait for another Yasuo main to setup their minion.
-        </div>
-        <div className="text-xl text-background  text-green-500 ">
-          Now It's Your turn to adjust the minion settings.
-        </div>
-        <AgreementMenu />
-        <div className="flex flex-col gap-2">
 
+      <div className="flex flex-col items-center mt-20">
+        <div className="divForStrategyField">
+          <h1 className="text-[1.2rem] text-black">Strategy</h1>
+          <TextArea
+            prop={strategyField}
+            handleChange={handleStraetgyChange}
+          ></TextArea>
         </div>
-      </div>
-      <div className="flex items-start flex-col-reverse mb-14 mr-10">
-        <PlayerStatus money={10000} team={-5}></PlayerStatus>
+        <div className="">
+          <div className="flex flex-row gap-2">
+            <GameButton
+              handleClick={handleConfirmClick}
+              title="Confirm"
+              disable={!(nameField && defenseField > 0 && strategyField)}
+            ></GameButton>
+            <h1>{minionNumber}</h1>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,0 +1,8 @@
+The game concludes under the following conditions:  
+1. A player loses all their minions in the territory.  
+2. The maximum number of turns, as specified, has been reached.  
+In the last case:
+- The player with more remaining minions in the territory wins.  
+- If both players have the same number of minions, the player with the higher total HP of all remaining minions wins.  
+- If both players have the same total HP, the player with the higher remaining budget wins.  
+- If all conditions are still equal, the game ends in a tie.  

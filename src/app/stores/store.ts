@@ -8,6 +8,7 @@ import roomDataSliceReducer from './slices/roomDataSlice';
 import  setBoardReducer from "./slices/boardSlice";
 
 
+
  const store = configureStore({
     reducer:{
         counter:counterReducer,
@@ -17,6 +18,7 @@ import  setBoardReducer from "./slices/boardSlice";
         playerProfile:playerProfileReducer,
         roomData:roomDataSliceReducer,
         board:setBoardReducer
+
     },
     middleware :(getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck:false,

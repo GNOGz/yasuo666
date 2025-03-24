@@ -33,9 +33,9 @@ export default function RootLayout({
   // const {connect ,subscribe} = useWebSocket();
   
   const router = useRouter();
-  useEffect(() => {
-    router.push("/menu")
-  }, []);
+  // useEffect(() => {
+  //   router.push("/menu")
+  // }, []);
   return (
     <html lang="en">
       <head>
