@@ -49,7 +49,7 @@ export const HexagonGrid= () => {
                                     marginTop: colIndex %2 === 0 ? "35px" : "-35px",
                                    
                                 }}>
-                                <Hexagon id={(rowIndex*10)+colIndex} Own={board[rowIndex][colIndex]?.own} Minion={board[rowIndex][colIndex]?.mm} bt={board[rowIndex][colIndex]?.bt}/>
+                                <Hexagon id={(rowIndex*10)+colIndex} Own={board[rowIndex][colIndex]?.own} Minion={board[rowIndex][colIndex]?.mm} bt={board[rowIndex][colIndex]?.bt} type="Map"/>
                             </div>))}
                     </div></div>
             ))}

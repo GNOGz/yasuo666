@@ -35,3 +35,18 @@ export interface hex {
     mm:number;
     bt:boolean;
 }
+
+export interface ButtonProps {
+    title: string;
+    color: string;
+    handleClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  }
+  
+export interface PlayermenuProps {
+    buttons: [ButtonProps, ButtonProps];
+  }
+
+export interface selecterHexMinion {
+    selectMinion: number;
+    selectHex: number;
+  }

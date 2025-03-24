@@ -1,20 +1,15 @@
-import MenuButton  from "./MenuButton"
+import MenuButton from "./MenuButton";
+import {  PlayermenuProps }  from '@/app/Types/Interfaces';
 
-interface menuInterface{
-    handleBuyMinionClick?:(event: React.MouseEvent<HTMLButtonElement>) => void,
-    handleBuyHexClick?:(event: React.MouseEvent<HTMLButtonElement>) => void,
-    handlEndTurnClick?:(event: React.MouseEvent<HTMLButtonElement>) => void,
-}
 
-const PlayerMenu = (prop:menuInterface)=>{
-    return(
-        <div className="border border-b-2 border-black w-[275] h-[222px] bg-primary flex flex-col gap-2 justify-center items-center">
-                <MenuButton title="BUY MINION" color="bg-MMButton" handleClick={prop.handleBuyMinionClick}></MenuButton>
-                <MenuButton title="BUY HEX" color="bg-HexButton" handleClick={prop.handleBuyHexClick}></MenuButton>
-                <MenuButton title="END TURN" color="bg-ENDButton" handleClick={prop.handlEndTurnClick}></MenuButton>
-
-        </div>
-    )
-}
+const PlayerMenu = ({ buttons }: PlayermenuProps) => {
+  return (
+    <div className="border border-b-2 border-black w-[17.188rem] h-[9.25rem] bg-primary flex flex-col gap-2 justify-center items-center">
+      {buttons.map((btn, index) => (
+        <MenuButton key={index} title={btn.title} color={btn.color} handleClick={btn.handleClick} />
+      ))}
+    </div>
+  );
+};
 
 export default PlayerMenu;

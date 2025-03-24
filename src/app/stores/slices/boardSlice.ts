@@ -2,6 +2,8 @@ import { createSlice,PayloadAction } from "@reduxjs/toolkit";
 import { hex } from '@/app/Types/Interfaces';
 import {RootState} from '../store'
 
+
+
 const genrateDummy = (): hex[][] => {
     const board: hex[][] = [];
   for (let i = 0; i < 8; i++) {
@@ -13,6 +15,7 @@ const genrateDummy = (): hex[][] => {
   }
   return board;
 }
+
 
 interface mainGameInterface{
   board: hex[][]

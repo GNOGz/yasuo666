@@ -6,7 +6,8 @@ interface data {
   Minion: number, // -5 -4 -3 -2 -1  0  1  2  3  4  5 
   id: number,
   bt: boolean,
-  off ? : boolean 
+  off ? : boolean,
+  type: string,
 }
 const pictures = ['/image/MMT1.jpg', '/image/MMT2.jpg', '/image/MMT3.jpg', '/image/MMT4.jpg', '/image/MMT5.jpg']
 
@@ -45,7 +46,7 @@ export const Hexagon = (data: data) => {
           marginLeft: "26px",
           zIndex: "1",
         }} className="absolute">
-          <HexBt index={data.id}></HexBt>
+          <HexBt index={data.id} type={data.type}></HexBt>
           </div> : null}
         
         {data.Minion != 0 ? <img src={MMImage}   width="40px"  style={{
