@@ -9,7 +9,7 @@ interface MenuButtonProps {
     onCancel?: () => void;
 }
 
-const PlayerMenuConfirm = ({ title, color, onClick, onCancel }: MenuButtonProps) => {
+const PlayerMenuConfirm = ({ title, color,onClick, onCancel }: MenuButtonProps) => {
     const handleConfirmClick = () => {
         if (onClick) onClick();
     };
@@ -17,7 +17,7 @@ const PlayerMenuConfirm = ({ title, color, onClick, onCancel }: MenuButtonProps)
         <div>
         {title === "BUY MINION" ? <div className="border border-b-2 border-black w-auto h-[220px] bg-primary flex flex-col gap-2 justify-center items-center">
             <MenuButton title={title} color={color} />          
-            <BuyMM/>
+            <BuyMM  />
             <div className="flex">
                 <div className="mx-5">
                     <GameButtonSM title="Confirm" handleClick={handleConfirmClick} />

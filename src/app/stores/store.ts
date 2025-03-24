@@ -6,6 +6,7 @@ import gameSettingReducer from './slices/gameSettingSlice';
 import playerProfileReducer from './slices/playerProfileSlice';
 import roomDataSliceReducer from './slices/roomDataSlice';
 import setBoardReducer from "./slices/boardSlice";
+import selecterHexMinionReducer from "./slices/selecterHexMinion";
 
  const store = configureStore({
     reducer:{
@@ -16,6 +17,7 @@ import setBoardReducer from "./slices/boardSlice";
         playerProfile:playerProfileReducer,
         roomData:roomDataSliceReducer,
         board:setBoardReducer,
+        selecterHexMinion:selecterHexMinionReducer,
     },
     middleware :(getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck:false,
