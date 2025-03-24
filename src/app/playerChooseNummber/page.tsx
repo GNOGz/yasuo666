@@ -10,7 +10,7 @@ const playerChooseNummber = () => {
   const handleClick = () => {
     if(selectedNumber != 0) {
     console.log(selectedNumber);
-    //router.push(``);
+    router.push(``);
     }else{
       console.log("Please select a number");
     }
@@ -22,8 +22,7 @@ const playerChooseNummber = () => {
      {[1, 2, 3, 4, 5].map((num, index) => (
           <div 
             key={num} 
-            onClick={() => setSelectedNumber(num)}
-                      >
+            onClick={() => setSelectedNumber(num)}>
            <div className={`flex flex-col mx-3  w-[6.25rem] h-[12.5rem] bg-MMButton ${selectedNumber >= num ?null:"grayscale"}`}>
            <Hexagon id={0} Own={0} Minion={-num} bt={false} off={true} ></Hexagon>
            <h1 className="text-black text-center text-8xl">{num}</h1>
