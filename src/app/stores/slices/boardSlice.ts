@@ -13,8 +13,12 @@ const genrateDummy = (): hex[][] => {
   return board;
 }
 
+interface mainGameInterface{
+  board: hex[][]
+}
+
 const initialState = {
-    board: genrateDummy() as hex[][],
+    board: genrateDummy() ,
 }
 
 export const boardSlice = createSlice({
