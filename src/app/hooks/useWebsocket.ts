@@ -53,7 +53,7 @@ export const useWebSocket = () => {
   const connect = () => {
     try {
       const stompClient = new Client({
-        brokerURL:`ws://localhost:8080/ws`,
+        brokerURL:`ws://10.124.192.19:8080/ws`,
         debug: () => {}, 
         reconnectDelay: 1000, 
         onConnect: () => {
