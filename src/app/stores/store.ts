@@ -8,6 +8,7 @@ import roomDataSliceReducer from './slices/roomDataSlice';
 
 import setBoardReducer from "./slices/boardSlice";
 import selecterHexMinionReducer from "./slices/selecterHexMinion";
+import mainGameDataReducer from './slices/mainGameDataSlice'
 
  const store = configureStore({
     reducer:{
@@ -19,7 +20,7 @@ import selecterHexMinionReducer from "./slices/selecterHexMinion";
         roomData:roomDataSliceReducer,
         board:setBoardReducer,
         selecterHexMinion:selecterHexMinionReducer,
-      
+        mainGameData:mainGameDataReducer,
     },
     middleware :(getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck:false,
