@@ -18,6 +18,7 @@ import { useAppSelector } from "../stores/hook";
 import { selectP1Budget, selectP2Budget, selectTurnCount, setP1Budget, setP2Budget } from "../stores/slices/mainGameDataSlice";
 import { json } from "stream/consumers";
 
+
 const greet = (event: any) => {
   alert(event.target.q)
 }
@@ -111,16 +112,15 @@ const grid = () => {
   return (
     <div>
       <div className="flex items-center justify-center bg-white h-screen">
-
-
+        {/* condition and Winner here */}
+        {false ?<Winnerscreen player={0}/>:null}
         {/* P1 Box */}
-        <div className="flex grow flex-col h-full">
+        <div className="flex w-[25rem] flex-col h-full">
           <div className="mt-10 mb-10">
             <PlayerStatus money={p1Budget?p1Budget:0} team={5}></PlayerStatus>
             
           </div>
           <div>
-            {/**/}
             {thisUserRole === "player1" ? (<div className="flex min-h-screen justify-center items-center">
               {actionState === StateList[0] ? <PlayerMenu buttons={[BuyHex, Skip]} /> : actionState === StateList[1]
                 ?
@@ -146,14 +146,16 @@ const grid = () => {
 
           {/* BoardGame Box */}
           <div
-            className="flex grow justify-center items-center  h-full ">
+            className="flex flex-col grow justify-center items-center  h-full ">
+              
             <HexagonGrid></HexagonGrid>
+            <h1 className="text-outline text-8xl -mt-6">{/*turn here*/}</h1>
           </div>
 
 
 
           {/* P2 Box */}
-          <div className="flex grow  flex-col-reverse h-full ">
+          <div className="flex w-[25rem]  flex-col-reverse h-full ">
 
             <div className="justify-center items-center mb-16 mt-14">
               <PlayerStatus money={p2Budget?p2Budget:0} team={-5}></PlayerStatus>
