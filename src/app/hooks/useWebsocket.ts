@@ -5,27 +5,28 @@ import {
   setClient,
   setConnectionStatus,
 } from "@/app/stores/slices/websocketSlice";
+import { setBoard } from "../stores/slices/boardSlice";
 import { useAppSelector } from "@/app/stores/hook";
 import { setField } from "../stores/slices/agreementFieldSlice";
 import { useState } from "react";
 
 export const useWebSocket = () => {
   const dispatch = useDispatch();
-  const { isConnected ,client} = useAppSelector(selectWebsocket);
+  const { isConnected, client } = useAppSelector(selectWebsocket);
   const serverUrl = process.env.API_BASE_URL;
-  
+
   const subscribe = (
     destination: string,
     callback: (payload: IMessage) => void
   ) => {
-    console.log('subscribing')
+    console.log("subscribing");
     if (client && isConnected) {
       const subscription = client.subscribe(destination, callback);
       console.log(`Subscribed to ${destination}`);
       return subscription;
     } else {
       console.log("No active WebSocket connection to disconnect.");
-      console.log(client,isConnected)
+      console.log(client, isConnected);
     }
   };
 
@@ -53,17 +54,18 @@ export const useWebSocket = () => {
   const connect = () => {
     try {
       const stompClient = new Client({
-        brokerURL:`ws://localhost:8080/ws`,
-        debug: () => {}, 
-        reconnectDelay: 1000, 
+        brokerURL: `ws://10.124.192.19:8080/ws`,
+        debug: () => {},
+        reconnectDelay: 1000,
         onConnect: () => {
-          onConnected(stompClient);}, 
-        onStompError: (frame) => console.error("STOMP Error:", frame), 
+          onConnected(stompClient);
+        },
+        onStompError: (frame) => console.error("STOMP Error:", frame),
       });
 
-      stompClient.activate(); 
+      stompClient.activate();
     } catch (e) {
-        console.error("WebSocket Connection Error:", e);
+      console.error("WebSocket Connection Error:", e);
     }
   };
 
@@ -78,8 +80,13 @@ export const useWebSocket = () => {
     }
   };
 
-  const onConnected = (client:Client) => {
-    dispatch(setClient(client))
+  const onConnected = (client: Client) => {
+    subscribe("/mainGame", (payload: IMessage) => {
+      console.log(`received payload :  ${payload.body}`);
+      const jsonPayload = JSON.parse(payload.body);
+      dispatch(setBoard(jsonPayload));
+    });
+    dispatch(setClient(client));
     dispatch(setConnectionStatus(true));
     console.log("WebSocket connected successfully");
   };

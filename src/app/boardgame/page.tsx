@@ -1,6 +1,6 @@
 "use client";
 import "../components/css/boardFlex.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HexagonGrid } from "../components/HexagonGrid";
 import PlayerStatus from "../components/PlayerStatus";
 import PlayerMenu from "../components/PlayerMenu";
@@ -11,7 +11,6 @@ import { useEffect } from "react";
 import { RootState } from "@/app/stores/store";
 import { selectUserName, selectRole, selectRoomId } from '../stores/slices/playerProfileSlice';
 import { setSelectHex,setSelectMinion,selectHex,selectMinion } from "../stores/slices/selecterHexMinion";
-import {Winnerscreen } from "../components/Winnerscreen";
 
 const greet = (event: any) => {
   alert(event.target.q)
@@ -30,6 +29,16 @@ const grid = () => {
   const [actionState, setActionState] = useState<string>(StateList[0]);
   
 
+  const [turnEnded, setTurnEnded] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const {subscribe} = useWebSocket();
+  useEffect(()=>{
+        subscribe("/mainGame", (payload:IMessage) => {
+          console.log(`received payload :  ${payload.body}`);
+          const jsonPayload = JSON.parse(payload.body);
+          dispatch(setBoard(jsonPayload.hexProp));
+        });
+  })
   const handleMenuClick = (action: string) => {
     if (actionState === StateList[0] && action === "BUY HEX") {
       setActionState(StateList[1]);
