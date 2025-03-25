@@ -8,18 +8,13 @@ export const PlayerStatus = ({team , money}:{team:number,money:number}) => {
     
     return (
       <div
-  className={`${teamColor} w-[20.343725rem] 
+  className={`${teamColor} w-[15rem] 
     border border-b border-black h-[5.9375rem] bg-primary items-center
     gap-2 px-5 mx-auto flex flex-row text-center justify-between
   `}
 >
   <h1 className="text-7xl text-outline">{`P${num}`}</h1>
-  <div className="relative w-[90px] h-[90px] flex items-center justify-center">
-    <svg width="100" height="100" viewBox="0 0 100 100">
-      <polygon points="50,0 100,25 100,75 50,100 0,75 0,25" className="fill-secondary" />
-    </svg>
-    <h1 className="absolute text-5xl text-outline">{`${num}`}</h1>
-  </div>
+
 
   
   <div className="relative text-white w-[90px] h-[90px] flex items-center justify-center">

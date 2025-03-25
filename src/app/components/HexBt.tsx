@@ -13,7 +13,7 @@ export const HexBt = ({ index, type }: IndexProps) => {
   return (
     <button
       type="button"
-      className={`w-12 h-12 flex items-center justify-center text-2xl text-white hover:opacity-80 active:scale-95 transition ${index===selectedHex?"scale-150":"" }`}
+      className={`w-12 h-12 flex items-center justify-center text-2xl text-white hover:opacity-80 active:scale-95 transition ${index===selectedHex?"scale-150":"" } ${type === "Minion"?"opacity-0":null}`}
       onClick={() => {
         /*console.log((index));
         console.log(type);*/
