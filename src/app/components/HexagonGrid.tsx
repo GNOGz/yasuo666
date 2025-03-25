@@ -7,10 +7,13 @@ import { setBoard } from "../stores/slices/boardSlice";
 import { UseDispatch } from "react-redux";
 import { useAppSelector } from "../stores/hook";
 import { useEffect } from "react";
+import { selectCurrentPlayer } from "../stores/slices/mainGameDataSlice";
+import { Selector } from "react-redux";
 import { useWebSocket } from "../hooks/useWebsocket";
 import { IMessage } from "@stomp/stompjs";
 import { dispatch } from "@svgdotjs/svg.js";
 import api from "../libs/api";
+
 
 export const HexagonGrid= () => {
     const board = useSelector((state: RootState) => state.board.board);
@@ -18,6 +21,7 @@ export const HexagonGrid= () => {
     const rows = Array.from({ length: 8 });
     const {subscribe,sendMessage} = useWebSocket();
     const dispatch = useDispatch();
+    const currentPlayer = useSelector(selectCurrentPlayer);
     useEffect(()=>{
   
     })
@@ -53,11 +57,11 @@ export const HexagonGrid= () => {
                             </div>))}
                     </div></div>
             ))}
-            <button className="bg-black p-2" onClick={()=>{
+            { true ? (
+            <button className="absolute bottom-0 bg-black  px-2 py-1 w-[4rem] text-xl" onClick={()=>{
                     sendMessage("/game/botOperate",{
-
                     });
-            }}>Hello world</button>
+            }}>Next</button>) :""}
         </div>
     );
 }

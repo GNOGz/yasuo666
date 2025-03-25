@@ -15,9 +15,9 @@ import { setBoard } from "../stores/slices/boardSlice";
 import { IMessage } from "@stomp/stompjs";
 import { useWebSocket } from "../hooks/useWebsocket";
 import { useAppSelector } from "../stores/hook";
-import { selectP1Budget, selectP2Budget, selectTurnCount, setP1Budget, setP2Budget } from "../stores/slices/mainGameDataSlice";
+import { selectP1Budget, selectP2Budget, selectTurnCount, setP1Budget, setP2Budget,selectIsGameOver,selectWinner } from "../stores/slices/mainGameDataSlice";
 import { json } from "stream/consumers";
-
+import { Winnerscreen } from "../components/Winnerscreen";
 
 const greet = (event: any) => {
   alert(event.target.q)
@@ -27,9 +27,10 @@ const grid = () => {
   const dispatch = useDispatch();
   const selectorHex = useSelector(selectHex);
   const selectorMinion = useSelector(selectMinion);
-
-
   
+  const selectorIsGameOver = useSelector(selectIsGameOver);
+  const selectorWinner = useSelector(selectWinner);
+
   const thisUserRole = useSelector(selectRole);
   const StateList = ["R1", "S1", "R2", "S2","END"]
   const [selectedAction, setSelectedAction] = useState<string | null>(null);
@@ -38,9 +39,7 @@ const grid = () => {
   const p1Budget = useAppSelector(selectP1Budget);
   const p2Budget = useAppSelector(selectP2Budget);
   const turnCount = useAppSelector(selectTurnCount);
-  
 
-  const [turnEnded, setTurnEnded] = useState<boolean>(false);
   const {subscribe} = useWebSocket();
   useEffect(()=>{
         subscribe("/mainGame", (payload:IMessage) => {
@@ -113,7 +112,7 @@ const grid = () => {
     <div>
       <div className="flex items-center justify-center bg-white h-screen">
         {/* condition and Winner here */}
-        {false ?<Winnerscreen player={0}/>:null}
+        {selectorIsGameOver ? <Winnerscreen player={selectorWinner}/> : null}
         {/* P1 Box */}
         <div className="flex w-[25rem] flex-col h-full">
           <div className="mt-10 mb-10">
@@ -147,9 +146,9 @@ const grid = () => {
           {/* BoardGame Box */}
           <div
             className="flex flex-col grow justify-center items-center  h-full ">
-              
+            <h1 className="text-outline text-5xl -mt-8 -mb-9">{turnCount}</h1>  
             <HexagonGrid></HexagonGrid>
-            <h1 className="text-outline text-8xl -mt-6">{/*turn here*/}</h1>
+            
           </div>
 
 
