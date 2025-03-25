@@ -6,11 +6,18 @@ import PlayerStatus from "../components/PlayerStatus";
 import PlayerMenu from "../components/PlayerMenu";
 import PlayerMenuConfirm from "../components/PlayerManuConfirm";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
 import { RootState } from "@/app/stores/store";
 import { selectUserName, selectRole, selectRoomId } from '../stores/slices/playerProfileSlice';
 import { setSelectHex,setSelectMinion,selectHex,selectMinion } from "../stores/slices/selecterHexMinion";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { setBoard } from "../stores/slices/boardSlice";
+import { IMessage } from "@stomp/stompjs";
+import { useWebSocket } from "../hooks/useWebsocket";
+import { useAppSelector } from "../stores/hook";
+import { selectP1Budget, selectP2Budget, selectTurnCount, setP1Budget, setP2Budget } from "../stores/slices/mainGameDataSlice";
+import { json } from "stream/consumers";
+
 
 const greet = (event: any) => {
   alert(event.target.q)
@@ -28,15 +35,20 @@ const grid = () => {
   const [selectedAction, setSelectedAction] = useState<string | null>(null);
   const [actionState, setActionState] = useState<string>(StateList[0]);
   
+  const p1Budget = useAppSelector(selectP1Budget);
+  const p2Budget = useAppSelector(selectP2Budget);
+  const turnCount = useAppSelector(selectTurnCount);
+  
 
   const [turnEnded, setTurnEnded] = useState<boolean>(false);
-  const dispatch = useDispatch();
   const {subscribe} = useWebSocket();
   useEffect(()=>{
         subscribe("/mainGame", (payload:IMessage) => {
           console.log(`received payload :  ${payload.body}`);
           const jsonPayload = JSON.parse(payload.body);
           dispatch(setBoard(jsonPayload.hexProp));
+          dispatch(setP1Budget(jsonPayload.p1Budget));
+          dispatch(setP2Budget(jsonPayload.p2Budget));
         });
   })
   const handleMenuClick = (action: string) => {
@@ -105,7 +117,7 @@ const grid = () => {
         {/* P1 Box */}
         <div className="flex w-[25rem] flex-col h-full">
           <div className="mt-10 mb-10">
-            <PlayerStatus money={10000} team={5}></PlayerStatus>
+            <PlayerStatus money={p1Budget?p1Budget:0} team={5}></PlayerStatus>
             
           </div>
           <div>
@@ -146,7 +158,7 @@ const grid = () => {
           <div className="flex w-[25rem]  flex-col-reverse h-full ">
 
             <div className="justify-center items-center mb-16 mt-14">
-              <PlayerStatus money={10000} team={-5}></PlayerStatus>
+              <PlayerStatus money={p2Budget?p2Budget:0} team={-5}></PlayerStatus>
             </div>
             <div>
               {/**/}

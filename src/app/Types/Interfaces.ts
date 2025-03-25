@@ -50,3 +50,9 @@ export interface selecterHexMinion {
     selectMinion: number;
     selectHex: number;
   }
+
+export interface hexDataProp{
+    own:number,
+    mm:number,
+    bt:boolean
+}

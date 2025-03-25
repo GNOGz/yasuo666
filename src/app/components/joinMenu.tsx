@@ -97,10 +97,12 @@ const JoinMenu = ({solitaire}: { solitaire: boolean }) => {
   };
 
   const handleStart = () => {
-    if(solitaire){
-      alert("Game is starting !!");
+    sendMessage("/gameSetting/setGameSetting",{
+      mode:solitaire?"solitaire":"duel",
+      gameStatus:"playerJoin",
+    })      
+    alert("Game is starting !!");
       router.push("/player_agreement");
-    }
     
   };
   const updatePlayerProfile = (name: string, role: string) => {
@@ -171,7 +173,7 @@ const JoinMenu = ({solitaire}: { solitaire: boolean }) => {
           </div>
           <div className="text-center mt-2 ">
             <GameButton
-              disable={thisUserRole !== "player1" && thisUserRole !== "player2"}
+              disable={!(player1Exist&&player1Exist) || ( thisUserRole !== "player1" && thisUserRole !== "player2")}
               title="Start"
               handleClick={handleStart}
             ></GameButton>
